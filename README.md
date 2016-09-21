@@ -5,4 +5,4 @@ This project is most generally a web application where users can get information
 
 * USDA Food Composition Database will be consumed for nutrition facts.
 * There will be a BMI calculator
-* There can be daily activity to calorie burn calculated (needs to be reseached)
+* There can be daily activity to calorie burn calculation (needs to be reseached)
