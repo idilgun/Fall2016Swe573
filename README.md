@@ -7,4 +7,4 @@ This project is most generally a web application where users can get information
 * There will be a BMI calculator
 * There can be daily activity to calorie burn calculation (needs to be researched)
 
-Time spent on issues can be seen on [time_entries.pdf](../master/time_entries.pdf) file created with [toggl.com](http://toggl.com)
+Project time management can be followed on https://docs.google.com/spreadsheets/d/1biVVAMCWMi1n-As73ILBY3L_rxqzZEKWJq7TcJ2Nl_4/edit?usp=sharing
