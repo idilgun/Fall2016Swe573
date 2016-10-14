@@ -1,5 +1,7 @@
 package com.idil.peoplesHeath.USDA.response;
 
+import java.util.ArrayList;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,14 +12,14 @@ public class List {
 	private String q;
 	
 	@JsonProperty("item")
-	private Item[] items;
-
-	public Item[] getItems() {
-		return items;
+	private ArrayList<Item> item;
+	
+	public ArrayList<Item> getItems() {
+		return item;
 	}
 
-	public void setItems(Item[] items) {
-		this.items = items;
+	public void setItems(ArrayList<Item> items) {
+		this.item = items;
 	}
 
 	public String getQ() {
