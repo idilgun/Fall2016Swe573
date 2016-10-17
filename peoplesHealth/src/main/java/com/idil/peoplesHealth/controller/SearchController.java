@@ -23,7 +23,13 @@ import com.idil.peoplesHeath.USDA.response.SearchByNameResponse;
 
 @Controller
 public class SearchController {
-
+	
+	/**
+	 * This method is used for searching food by name and group
+	 * @param searchString is what the user inputs to search for a food item
+	 * @param group is one of the food groups that the USDA api presents
+	 * @return
+	 */
 	@RequestMapping(value = "/searchFood/{searchString}/{group}" , method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<SearchByNameResponse> searchFood(@PathVariable(value="searchString") String searchString,
 														   @PathVariable(value="group") String group){
