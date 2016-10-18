@@ -13,13 +13,15 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
  	<mvc:annotation-driven/>
  	<tx:annotation-driven />
 	
+	<mvc:resources mapping="/resources/**" location="/resources/"/>
+	
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
-			<value>/WEB-INF/views/</value>
+			<value>/WEB-INF/jsp/</value>
 		</property>
 		<property name="suffix">
-			<value>.jsp</value>
+			<value>".jsp"</value>
 		</property>
 	</bean>
 	
