@@ -6,6 +6,7 @@
   <session-factory>
     <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="show_sql">true</property> 
+    <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
     <mapping package="com.idil.peoplesHealth.domain"/>
     <mapping class="com.idil.peoplesHealth.domain.User"/>
   </session-factory>
