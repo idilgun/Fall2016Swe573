@@ -16,6 +16,13 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 	<mvc:resources mapping="/resources/**" location="/resources/"/>
 	
 	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="useDefaultSuffixPattern" value="false" />
+	</bean>
+	
+	<mvc:resources location="/" mapping="/resources/**"/> 
+	
+	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
 			<value>/WEB-INF/jsp/</value>
