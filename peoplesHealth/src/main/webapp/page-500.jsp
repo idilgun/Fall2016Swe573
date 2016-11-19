@@ -41,20 +41,20 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
   <!-- Fonts END -->
 
   <!-- Global styles START -->          
-  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Global styles END --> 
    
   <!-- Page level plugin styles START -->
-  <link href="assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
   <!-- Page level plugin styles END -->
 
   <!-- Theme styles START -->
-  <link href="assets/pages/css/components.css" rel="stylesheet">
-  <link href="assets/corporate/css/style.css" rel="stylesheet">
-  <link href="assets/corporate/css/style-responsive.css" rel="stylesheet">
-  <link href="assets/corporate/css/themes/green.css" rel="stylesheet" id="style-color">
-  <link href="assets/corporate/css/custom.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/assets/pages/css/components.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/assets/corporate/css/style.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/assets/corporate/css/style-responsive.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/assets/corporate/css/themes/green.css" rel="stylesheet" id="style-color">
+  <link href="${pageContext.request.contextPath}/resources/assets/corporate/css/custom.css" rel="stylesheet">
   <!-- Theme styles END -->
 </head>
 <!-- Head END -->
@@ -76,8 +76,8 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
       <!-- BEGIN TOP BAR MENU -->
       <div class="col-md-6 col-sm-6 additional-nav">
         <ul class="list-unstyled list-inline pull-right">
-          <li><a href="page-login.html">Log In</a></li>
-          <li><a href="page-reg-page.html">Sign Up</a></li>
+          <li><a href="page-login.jsp">Log In</a></li>
+          <li><a href="page-reg-page.jsp">Sign Up</a></li>
         </ul>
       </div>
       <!-- END TOP BAR MENU -->
@@ -88,7 +88,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
     <!-- BEGIN HEADER -->
     <div class="header">
       <div class="container">
-        <a class="site-logo" href="index.html"><img src="assets/corporate/img/logos/peoplesHealth.png" alt="people's health"></a>
+        <a class="site-logo" href="index.jsp"><img src="${pageContext.request.contextPath}/resources/assets/corporate/img/logos/peoplesHealth.png" alt="people's health"></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -96,13 +96,13 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         <div class="header-navigation pull-right font-transform-inherit">
           <ul>
 
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.jsp">Home</a></li>
 
-            <li><a href="page-faq.html">BMI</a></li>
+            <li><a href="page-faq.jsp">BMI</a></li>
 
-            <li><a href="page-services.html">Food and Activity</a></li>
+            <li><a href="page-services.jsp">Food and Activity</a></li>
 
-            <li><a href="portfolio-2.html">Analytics</a></li>
+            <li><a href="portfolio-2.jsp">Analytics</a></li>
 
           </ul>
         </div>
@@ -141,16 +141,16 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
     <!--[if lt IE 9]>
     <script src="assets/plugins/respond.min.js"></script>
     <![endif]--> 
-    <script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
-    <script src="assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
+    <script src="${pageContext.request.contextPath}/resources/assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
 
     <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
-    <script src="assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+    <script src="${pageContext.request.contextPath}/resources/assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
 
-    <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/corporate/scripts/layout.js" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
             Layout.init();    
