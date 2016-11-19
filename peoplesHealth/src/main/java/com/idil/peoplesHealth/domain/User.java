@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
-@Table(name = "mydb.USER")
+@Table(name = "poeplesHealth.USER")
 public class User {
 
 	@JsonProperty("email")
