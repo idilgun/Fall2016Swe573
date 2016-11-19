@@ -9,5 +9,6 @@
     <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
     <mapping package="com.idil.peoplesHealth.domain"/>
     <mapping class="com.idil.peoplesHealth.domain.User"/>
+    <mapping class="com.idil.peoplesHealth.domain.UserHistory"/>
   </session-factory>
 </hibernate-configuration>

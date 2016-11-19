@@ -10,6 +10,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
  
 	<context:component-scan base-package="com.idil.peoplesHealth.controller" />
 	<context:component-scan base-package="com.idil.peoplesHealth.dao" />
+	<context:component-scan base-package="com.idil.peoplesHealth.util" />
  	<mvc:annotation-driven/>
  	<tx:annotation-driven />
 	
@@ -53,6 +54,22 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 	<bean id="transactionManager"
     	class="org.springframework.orm.hibernate4.HibernateTransactionManager">
     	<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<!-- SMTP settings -->
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="peoples.health1@gmail.com" />
+		<property name="password" value="peoplesHealth" />
+
+		<property name="javaMailProperties">
+			<!-- additional properties specific to JavaMail -->
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
 	</bean>
 	
 </beans>
