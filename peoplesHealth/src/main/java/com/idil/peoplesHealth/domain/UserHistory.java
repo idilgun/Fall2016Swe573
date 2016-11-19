@@ -57,10 +57,6 @@ public class UserHistory {
 	@Column(name = "weight")
 	private Integer weight;
 	
-	@Column(name = "notes")
-	private String notes;
-
-	
 
 	public email_dateTimeId getId() {
 		return id;
@@ -84,14 +80,6 @@ public class UserHistory {
 
 	public void setWeight(Integer weight) {
 		this.weight = weight;
-	}
-
-	public String getNotes() {
-		return notes;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
 	}
 	
 	

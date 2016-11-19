@@ -43,20 +43,27 @@ public class UserDao {
 		id.setDateTime(now);
 		userHistory.setId(id);
 		
+		int check = 0;
+		
 		if(userDetail.getHeight()!=null){
 			user.setHeight(userDetail.getHeight());
 			userHistory.setHeight(userDetail.getHeight());
+			check ++;
 		}
 		if(userDetail.getNotes()!=null){
 			user.setNotes(userDetail.getNotes());
-			userHistory.setNotes(userDetail.getNotes());
 		}
 		if(userDetail.getWeight()!=null){
 			user.setWeight(userDetail.getWeight());
 			userHistory.setWeight(userDetail.getWeight());
+			check ++;
 		}
 		sessionFactory.getCurrentSession().update(user);
-		sessionFactory.getCurrentSession().save(userHistory);
+		
+		// update user history only if at least one of weight or height is being updated
+		if(check>0){
+			sessionFactory.getCurrentSession().save(userHistory);
+		}
 		return true;
 		
 	}
