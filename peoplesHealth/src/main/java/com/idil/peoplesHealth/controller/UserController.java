@@ -82,7 +82,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/forgotPassword" , method = RequestMethod.GET)
-	public ResponseEntity<String> searchFood(@RequestParam String email){
+	public ResponseEntity<String> sendPasswordMail(@RequestParam String email){
 		
 		User user = userDao.getUserDetails(email);
 		
@@ -102,4 +102,31 @@ public class UserController {
 			return response;
 		}
 	}
+	
+	/**
+	 * This method is used for user forgot password
+	 * @param email holds the user's email who forgot password, 
+	 * a mail with login details will be forwarded 
+	 * @return
+	 */
+	@RequestMapping(value = "/authorizeUser" , method = RequestMethod.GET)
+	public ResponseEntity<String> authorizeUser(@RequestParam String email, @RequestParam String password){
+		
+		User user = userDao.getUserDetails(email);
+		
+		if(user == null){
+			ResponseEntity<String> response = new ResponseEntity<String>("user doesn't exist", HttpStatus.BAD_REQUEST);
+			return response;
+		}
+		if(user.getPassword().equals(password)){
+			ResponseEntity<String> response = new ResponseEntity<String>("user authorized", HttpStatus.OK);
+			return response;
+		}
+		else{
+			ResponseEntity<String> response = new ResponseEntity<String>("wrong password", HttpStatus.UNAUTHORIZED);
+			return response;
+		}
+		
+	}
+	
 }
