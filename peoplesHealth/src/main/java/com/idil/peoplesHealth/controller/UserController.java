@@ -54,9 +54,8 @@ public class UserController {
 	}
 	
 	/**
-	 * This method is used for updating user details
+	 * This method is used for updating user details - This is only used for existing users
 	 * @param userDetail holds the data client side application has collected from the user
-	 * This is only used for existing users
 	 * @return
 	 */
 	@RequestMapping(value = "/updateUserInformation" , method = RequestMethod.POST)
@@ -76,9 +75,8 @@ public class UserController {
 	}
 	
 	/**
-	 * This method is used for user forgot password
-	 * @param email holds the user's email who forgot password, 
-	 * a mail with login details will be forwarded 
+	 * This method is used for user forgot password, a mail with login details will be forwarded 
+	 * @param email holds the user's email who forgot password
 	 * @return
 	 */
 	@RequestMapping(value = "/forgotPassword" , method = RequestMethod.GET)
@@ -104,9 +102,9 @@ public class UserController {
 	}
 	
 	/**
-	 * This method is used for user forgot password
-	 * @param email holds the user's email who forgot password, 
-	 * a mail with login details will be forwarded 
+	 * This method is used for user authorization -password user inputs is compared with the password we have in database
+	 * @param email is user's unique identifier
+	 * @param password is user's password
 	 * @return
 	 */
 	@RequestMapping(value = "/authorizeUser" , method = RequestMethod.GET)
