@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -230,4 +231,15 @@ public class SearchController {
 		return response;
 		
 	}
+	
+	@RequestMapping(value = "/foodDetails/{ndbno}" , method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<FoodItem> getFoodDetailsWithUnit(@PathVariable(value="ndbno") String ndbno,
+																			@RequestParam(value="unit") String unit){
+		FoodItem foodDetails = foodConsumptionDao.getFoodItem(ndbno, unit);
+		
+		ResponseEntity<FoodItem> response = new ResponseEntity<FoodItem>(foodDetails, HttpStatus.OK);
+		return response;
+	}
+		
+		
 }

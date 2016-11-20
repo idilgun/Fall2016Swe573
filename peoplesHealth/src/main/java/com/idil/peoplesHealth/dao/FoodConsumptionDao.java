@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.idil.peoplesHealth.domain.FoodItem;
+import com.idil.peoplesHealth.domain.FoodItem.ndbno_itemUnit;
 import com.idil.peoplesHealth.domain.User;
 
 @Component
@@ -43,6 +44,18 @@ public class FoodConsumptionDao {
 		}
 		
 		return units;
+	}
+
+	@Transactional
+	public FoodItem getFoodItem(String ndbno, String unit) {
+		
+		ndbno_itemUnit id = new ndbno_itemUnit();
+		id.setItemUnit(unit);
+		id.setNdbno(ndbno);
+		
+		FoodItem foodItem = (FoodItem) sessionFactory.getCurrentSession().get(FoodItem.class, id);
+		return foodItem;
+
 	}
 	
 	
