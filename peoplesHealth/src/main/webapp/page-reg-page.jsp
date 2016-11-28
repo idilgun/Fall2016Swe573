@@ -12,7 +12,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en">
+<html lang="en" ng-app="registerModule">
 <!--<![endif]-->
 
 <!-- Head BEGIN -->
@@ -63,11 +63,14 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 	href="${pageContext.request.contextPath}/resources/assets/corporate/css/custom.css"
 	rel="stylesheet">
 <!-- Theme styles END -->
+<script src="${pageContext.request.contextPath}/resources/js/angular.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/resources/js/registerScript.js"></script>
 </head>
 <!-- Head END -->
 
 <!-- Body BEGIN -->
-<body class="corporate">
+<body class="corporate" ng-controller="registerController">
 
 	<!-- BEGIN TOP BAR -->
 	<div class="pre-header">
@@ -139,7 +142,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 												should we call you? <span class="require">*</span>
 											</label>
 											<div class="col-lg-8">
-												<input type="text" class="form-control" id="signUp_name">
+												<input type="text" class="form-control" id="signUp_name" ng-model="signUp_name">
 											</div>
 										</div>
 										<div class="form-group">
@@ -147,7 +150,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 												Email? <span class="require">*</span>
 											</label>
 											<div class="col-lg-8">
-												<input type="text" class="form-control" id="signUp_email">
+												<input type="text" class="form-control" id="signUp_email" ng-model="signUp_email">
 											</div>
 										</div>
 										<div class="form-group">
@@ -158,7 +161,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 												<table>
 													<tr>
 														<td>Day <select class="form-control" name='day'
-															id="signUp_dateOfBirth_day">
+															id="signUp_dateOfBirth_day" ng-model="signUp_dateOfBirth_day">
 																<option value='1'>1</option>
 																<option value='2'>2</option>
 																<option value='3'>3</option>
@@ -192,7 +195,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 																<option value='31'>31</option>
 														</select></td>
 														<td>Month <select class="form-control" name='month'
-															id="signUp_dateOfBirth_month">
+															id="signUp_dateOfBirth_month" ng-model="signUp_dateOfBirth_month">
 																<option value='1'>1</option>
 																<option value='2'>2</option>
 																<option value='3'>3</option>
@@ -207,7 +210,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 																<option value='12'>12</option>
 														</select></td>
 														<td>Year <select class="form-control" name='day'
-															id="signUp_dateOfBirth_year">
+															id="signUp_dateOfBirth_year" ng-model="signUp_dateOfBirth_year">
 																<option value='1960'>1960</option>
 																<option value='1961'>1961</option>
 																<option value='1962'>1962</option>
@@ -275,9 +278,9 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 											</label>
 											<div class="col-lg-8">
 												<label class="radio-inline"> <input type="radio"
-													id="signUp_genderFemale" name="signUpGender">Female
+													id="signUp_genderFemale" ng-model="signUp_gender" value="F" name="signUpGender">Female
 												</label> <label class="radio-inline"> <input type="radio"
-													id="signUp_genderMale" name="signUpGender">Male
+													id="signUp_genderMale" ng-model="signUp_gender" value="M" name="signUpGender">Male
 												</label>
 											</div>
 										</div>
@@ -289,7 +292,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 												<span class="require">*</span>
 											</label>
 											<div class="col-lg-8">
-												<input type="text" class="form-control" id="signUp_password">
+												<input type="text" class="form-control" id="signUp_password" ng-model="signUp_password">
 											</div>
 										</div>
 										<div class="form-group">
@@ -298,7 +301,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 											</label>
 											<div class="col-lg-8">
 												<input type="text" class="form-control"
-													id="signUp_confirmPassword">
+													id="signUp_confirmPassword" ng-model="signUp_confirmPassword">
 											</div>
 										</div>
 									</fieldset>
@@ -306,7 +309,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 										<div
 											class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
 											<button type="submit" class="btn btn-primary"
-												id="signUp_submitButton">Create an account</button>
+												id="signUp_submitButton" ng-click="signUp()">Create an account</button>
 											<button type="button" class="btn btn-default">Cancel</button>
 										</div>
 									</div>
@@ -319,18 +322,9 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 			</div>
 			<!-- END SIDEBAR & CONTENT -->
 		</div>
+		
 	</div>
 	
-	<script type="text/javascript"
-					src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.min.js"></script>
-	<script type="text/javascript">
-		$('#signUp_submitButton').on("click", function() {
-							
-							
-							
-				});
-	</script>
-
 
 
 
@@ -340,34 +334,17 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 	<!--[if lt IE 9]>
     <script src="${pageContext.request.contextPath}/resources/assets/plugins/respond.min.js"></script>
     <![endif]-->
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/plugins/jquery-migrate.min.js"
-		type="text/javascript"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/plugins/bootstrap/js/bootstrap.min.js"
-		type="text/javascript"></script>
+
 	
 	<!-- END CORE PLUGINS -->
 
 	<!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/plugins/fancybox/source/jquery.fancybox.pack.js"
-		type="text/javascript"></script>
-	<!-- pop up -->
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/plugins/uniform/jquery.uniform.min.js"
-		type="text/javascript"></script>
+
 
 	<script
 		src="${pageContext.request.contextPath}/resources/assets/corporate/scripts/layout.js"
 		type="text/javascript"></script>
-	<script type="text/javascript">
-		jQuery(document).ready(function() {
-			Layout.init();
-			Layout.initUniform();
-			Layout.initTwitter();
-		});
-	</script>
+	
 	<!-- END PAGE LEVEL JAVASCRIPTS -->
 </body>
 <!-- END BODY -->
