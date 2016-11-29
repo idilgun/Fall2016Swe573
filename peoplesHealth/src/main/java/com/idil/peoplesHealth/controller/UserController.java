@@ -37,7 +37,7 @@ public class UserController {
 	 * @param userDetail holds the data client side application has collected from the user
 	 * @return
 	 */
-	@RequestMapping(value = "/newUser" , method = RequestMethod.POST)
+	@RequestMapping(value = "/newUser" , method = RequestMethod.POST, consumes = {"application/json;charset=UTF-8"}, produces={"tetx/html"})
 	public @ResponseBody ResponseEntity<String> createNewUser(@RequestBody User userDetail){
 
 		try{

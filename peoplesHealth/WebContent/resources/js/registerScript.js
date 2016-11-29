@@ -2,7 +2,7 @@
 
 var loginApp = angular.module('registerModule',[]);
 
-loginApp.controller('registerController', ['$scope',function($scope){
+loginApp.controller('registerController', ['$scope','$http', '$window', function($scope,  $http, $window){
 	
 	$scope.signUp_gender = "";
 	$scope.signUp_name = "";
@@ -36,6 +36,17 @@ loginApp.controller('registerController', ['$scope',function($scope){
 			};
 			
 		console.log(user);
+
+		$http.post('../peoplesHealth/newUser', user, {'Content-Type': 'application/json'})
+        .success(function (data, status, headers, config) {
+        	console.log("got it !");
+        	$window.location.href = '/peoplesHealth/page-faq.jsp';
+        })
+        .error(function (data, status, header, config) {
+        	console.log("error !");
+        });
+				
+		
      };
 	
 	
