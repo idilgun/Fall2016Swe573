@@ -31,7 +31,7 @@ loginApp.factory('NameService', function() {
 
 
 
-loginApp.controller('registerController', ['$scope','$http', '$window','NameService','$location', function($scope,  $http, $window, NameService, $location){
+loginApp.controller('registerController', ['$scope','$http', '$window','NameService','$location', '$rootScope', function($scope,  $http, $window, NameService, $location, $rootScope){
 	
 	$scope.signUp_gender = "";
 	$scope.signUp_name = "";
@@ -70,6 +70,9 @@ loginApp.controller('registerController', ['$scope','$http', '$window','NameServ
 		 if(location.hostname == "localhost"){
 			 $http.post('../peoplesHealth/newUser', user, {'Content-Type': 'application/json'})
 		        .success(function (data, status, headers, config) {
+		        	$rootScope.email = $scope.signUp_email;
+		        	$rootScope.password = $scope.signUp_password;
+		        	$rootScope.loggedIn = true;
 		        	NameService.setName(user.name);
 			    	$location.path('/bmi');
 		        })
@@ -93,7 +96,7 @@ loginApp.controller('registerController', ['$scope','$http', '$window','NameServ
 	
 }]);
 
-loginApp.controller('loginController', ['$scope','$http', '$window','NameService', '$location', function($scope,  $http, $window, NameService, $location){
+loginApp.controller('loginController', ['$scope','$http', '$window','NameService', '$location', '$rootScope', function($scope,  $http, $window, NameService, $location, $rootScope){
 	$scope.login_email = "";
 	$scope.login_password = "";
 
@@ -107,8 +110,11 @@ loginApp.controller('loginController', ['$scope','$http', '$window','NameService
 		        }
 		     }, {'Accept': 'text/plain;charset=ISO-8859-1', 'Content-Type': 'text/plain'})
 		     .success(function (data, status, headers, config) {
-		    	 NameService.setName(data.name);
-		    	 $location.path('/bmi');
+		    	$rootScope.email = $scope.signUp_email;
+		        $rootScope.password = $scope.signUp_password;
+		        $rootScope.loggedIn = true;
+		    	NameService.setName(data.name);
+		    	$location.path('/bmi');
 		     })
 		     .error(function (data, status, headers, config) {
 		    	 window.alert("The password you entered is incorrect");
@@ -134,6 +140,6 @@ loginApp.controller('loginController', ['$scope','$http', '$window','NameService
 	};
 }]);
 
-loginApp.controller('bmiController', ['$scope','$http', '$window','NameService', function($scope, $http, $window, NameService){
+loginApp.controller('bmiController', ['$scope','$http', '$window','NameService', '$rootScope', function($scope, $http, $window, NameService, $rootScope){
 	$scope.name = NameService.getName();
 }]);

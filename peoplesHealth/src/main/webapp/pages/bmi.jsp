@@ -37,9 +37,9 @@
 
 				<li><a href="#/bmi">BMI</a></li>
 
-				<li><a href="page-services.jsp">Food and Activity</a></li>
+				<li><a href="#/foodActivity">Food and Activity</a></li>
 
-				<li><a href="portfolio-2.jsp">Analytics</a></li>
+				<li><a href="#/analytics">Analytics</a></li>
 
 			</ul>
 		</div>
