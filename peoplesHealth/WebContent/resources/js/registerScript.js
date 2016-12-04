@@ -1,19 +1,8 @@
 
 
-var loginApp = angular.module('registerModule',['ngRoute']);
+var loginApp = angular.module('registerModule',['ngRoute', 'mainApp']);
 
-loginApp.config(function($routeProvider) {    
-	$routeProvider
-        .when('/', {
-        	templateUrl: 'pages/welcome.jsp'
-        })
-        .when('/bmi', {
-        	templateUrl: 'pages/bmi.jsp'
-        })
-        .otherwise({
-        	redirectTo: 'pages/welcome.jsp'
-        });
-});
+
 
 loginApp.service('authenticationService', function() {
 	return {
