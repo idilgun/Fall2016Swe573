@@ -59,15 +59,15 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/updateUserInformation" , method = RequestMethod.POST)
-	public @ResponseBody ResponseEntity<String> updateUser(@RequestBody User userDetail){
+	public @ResponseBody ResponseEntity<User> updateUser(@RequestBody User userDetail){
 
 		
 		if(userDao.updateUser(userDetail)){
-			ResponseEntity<String> response = new ResponseEntity<String>("User Updated", HttpStatus.OK);
+			ResponseEntity<User> response = new ResponseEntity<User>(userDetail, HttpStatus.OK);
 			return response;
 		}
 		else{
-			ResponseEntity<String> response = new ResponseEntity<String>("User Doesn't Exist", HttpStatus.BAD_REQUEST);
+			ResponseEntity<User> response = new ResponseEntity<User>(userDetail, HttpStatus.BAD_REQUEST);
 			return response;
 		}
 		

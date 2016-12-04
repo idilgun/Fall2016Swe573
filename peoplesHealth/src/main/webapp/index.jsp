@@ -4,14 +4,17 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-	
-<script src="${pageContext.request.contextPath}/resources/js/angular.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/angular-route.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/index.js"
-					type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/resources/js/registerScript.js"></script>
 
-					
+<script
+	src="${pageContext.request.contextPath}/resources/js/angular.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/angular-route.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/index.js"
+	type="text/javascript"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/registerScript.js"></script>
+
+
 
 <meta charset="utf-8">
 <title>People's Health</title>
@@ -64,34 +67,35 @@
 <link
 	href="${pageContext.request.contextPath}/resources/assets/corporate/css/custom.css"
 	rel="stylesheet">
-	
+
 <!-- Theme styles END -->
 
 </head>
 <body ng-app="mainApp">
 	<div ng-view></div>
-	
-				<!-- END STEPS -->
 
-				<!-- Load javascripts at bottom, this will reduce page load time -->
-				<!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
-				<!--[if lt IE 9]>
+	<!-- END STEPS -->
+
+	<!-- Load javascripts at bottom, this will reduce page load time -->
+	<!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.min.js"></script>
     <![endif]-->
-				<script
-					src="${pageContext.request.contextPath}/resources/assets/plugins/jquery.min.js"
-					type="text/javascript"></script>
-				<script
-					src="${pageContext.request.contextPath}/resources/assets/plugins/jquery-migrate.min.js"
-					type="text/javascript"></script>
-				<script
-					src="${pageContext.request.contextPath}/resources/assets/plugins/bootstrap/js/bootstrap.min.js"
-					type="text/javascript"></script>
-				<!-- END CORE PLUGINS -->
+	<script
+		src="${pageContext.request.contextPath}/resources/assets/plugins/jquery.min.js"
+		type="text/javascript"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/assets/plugins/jquery-migrate.min.js"
+		type="text/javascript"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/assets/plugins/bootstrap/js/bootstrap.min.js"
+		type="text/javascript"></script>
 
-				<!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+	<!-- END CORE PLUGINS -->
 
-				<!-- END PAGE LEVEL JAVASCRIPTS -->
-				
+	<!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+
+	<!-- END PAGE LEVEL JAVASCRIPTS -->
+
 </body>
 </html>
