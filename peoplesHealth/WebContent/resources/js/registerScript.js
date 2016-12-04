@@ -47,6 +47,11 @@ loginApp.controller('registerController', ['$scope','$http', '$window','NameServ
 	
 	$scope.signUp = function () {
 		
+		if($scope.signUp_password != $scope.signUp_confirmPassword){
+			window.alert("passwords don't match, please try again");
+			return;
+		}
+		
 		if($scope.signUp_dateOfBirth_day<10){
 			$scope.signUp_dateOfBirth_day = "0" + $scope.signUp_dateOfBirth_day;
 		}
