@@ -12,7 +12,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en">
+<html lang="en" ng-app="registerModule">
 <!--<![endif]-->
 
 <!-- Head BEGIN -->
@@ -56,11 +56,15 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
   <link href="${pageContext.request.contextPath}/resources/assets/corporate/css/themes/green.css" rel="stylesheet" id="style-color">
   <link href="${pageContext.request.contextPath}/resources/assets/corporate/css/custom.css" rel="stylesheet">
   <!-- Theme styles END -->
+  
+  <script src="${pageContext.request.contextPath}/resources/js/angular.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/angular-route.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/registerScript.js"></script>
 </head>
 <!-- Head END -->
 
 <!-- Body BEGIN -->
-<body class="corporate">
+<body class="corporate" ng-controller="bmiController">
 
 <!-- BEGIN TOP BAR -->
 <div class="pre-header">
@@ -117,6 +121,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
           <!-- BEGIN CONTENT -->
           <div class="col-md-12 col-sm-12">
             <h1>BMI Overview</h1>
+            <h2>Welcome {{name}}</h2>
             <div class="content-page">
               <div class="row">
                 <div class="col-md-3 col-sm-3">

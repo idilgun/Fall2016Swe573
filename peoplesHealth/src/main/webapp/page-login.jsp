@@ -12,7 +12,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en">
+<html lang="en" ng-app="registerModule">
 <!--<![endif]-->
 
 <!-- Head BEGIN -->
@@ -42,12 +42,16 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
   <link href="${pageContext.request.contextPath}/resources/assets/corporate/css/style-responsive.css" rel="stylesheet">
   <link href="${pageContext.request.contextPath}/resources/assets/corporate/css/themes/green.css" rel="stylesheet" id="style-color">
   <link href="${pageContext.request.contextPath}/resources/assets/corporate/css/custom.css" rel="stylesheet">
+  
+  <script src="${pageContext.request.contextPath}/resources/js/angular.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/angular-route.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/registerScript.js"></script>
   <!-- Theme styles END -->
 </head>
 <!-- Head END -->
 
 <!-- Body BEGIN -->
-<body class="corporate">
+<body class="corporate" ng-controller="loginController">
 <!-- BEGIN TOP BAR -->
 <div class="pre-header">
   <div class="container">
@@ -100,7 +104,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 
     <div class="main">
       <div class="container">
-
+			
           <!-- BEGIN CONTENT -->
           <div class="col-md-9 col-sm-9">
             <h1>Login</h1>
@@ -111,13 +115,13 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                     <div class="form-group">
                       <label for="email" class="col-lg-4 control-label">Email <span class="require">*</span></label>
                       <div class="col-lg-8">
-                        <input type="text" class="form-control" id="email">
+                        <input type="text" class="form-control" id="login_email" ng-model="login_email">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
                       <div class="col-lg-8">
-                        <input type="text" class="form-control" id="password">
+                        <input type="password" class="form-control" id="login_password" ng-model="login_password" autocomplete="off">
                       </div>
                     </div>
                     <div class="row">
@@ -127,7 +131,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                     </div>
                     <div class="row">
                       <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-primary" ng-click="login()">Login</button>
                       </div>
                     </div>
                   </form>
@@ -147,21 +151,12 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
     <script src="${pageContext.request.contextPath}/resources/assets/plugins/jquery.min.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
-    <script src="${pageContext.request.contextPath}/resources/assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
 
     <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
     <script src="${pageContext.request.contextPath}/resources/assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
     <script src="${pageContext.request.contextPath}/resources/assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-
-    <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        jQuery(document).ready(function() {
-            Layout.init();
-            Layout.initUniform();
-            Layout.initTwitter();
-        });
-    </script>
+    
     <!-- END PAGE LEVEL JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

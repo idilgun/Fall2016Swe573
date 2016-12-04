@@ -108,20 +108,20 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/authorizeUser" , method = RequestMethod.GET)
-	public ResponseEntity<String> authorizeUser(@RequestParam String email, @RequestParam String password){
+	public ResponseEntity<User> authorizeUser(@RequestParam String email, @RequestParam String password){
 		
 		User user = userDao.getUserDetails(email);
 		
 		if(user == null){
-			ResponseEntity<String> response = new ResponseEntity<String>("user doesn't exist", HttpStatus.BAD_REQUEST);
+			ResponseEntity<User> response = new ResponseEntity<User>(new User(), HttpStatus.BAD_REQUEST);
 			return response;
 		}
 		if(user.getPassword().equals(password)){
-			ResponseEntity<String> response = new ResponseEntity<String>("user authorized", HttpStatus.OK);
+			ResponseEntity<User> response = new ResponseEntity<User>(user, HttpStatus.OK);
 			return response;
 		}
 		else{
-			ResponseEntity<String> response = new ResponseEntity<String>("wrong password", HttpStatus.UNAUTHORIZED);
+			ResponseEntity<User> response = new ResponseEntity<User>(new User(), HttpStatus.UNAUTHORIZED);
 			return response;
 		}
 		

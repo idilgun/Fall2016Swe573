@@ -64,7 +64,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 	rel="stylesheet">
 <!-- Theme styles END -->
 <script src="${pageContext.request.contextPath}/resources/js/angular.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/resources/js/angular-route.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/registerScript.js"></script>
 </head>
 <!-- Head END -->
@@ -292,7 +292,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 												<span class="require">*</span>
 											</label>
 											<div class="col-lg-8">
-												<input type="text" class="form-control" id="signUp_password" ng-model="signUp_password">
+												<input type="password" class="form-control" id="signUp_password" ng-model="signUp_password">
 											</div>
 										</div>
 										<div class="form-group">
@@ -300,7 +300,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 												password <span class="require">*</span>
 											</label>
 											<div class="col-lg-8">
-												<input type="text" class="form-control"
+												<input type="password" class="form-control"
 													id="signUp_confirmPassword" ng-model="signUp_confirmPassword">
 											</div>
 										</div>

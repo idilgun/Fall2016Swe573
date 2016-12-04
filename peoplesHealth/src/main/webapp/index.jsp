@@ -206,9 +206,6 @@
 				<!-- slider for products -->
 
 				<script
-					src="${pageContext.request.contextPath}/resources/assets/corporate/scripts/layout.js"
-					type="text/javascript"></script>
-				<script
 					src="${pageContext.request.contextPath}/resources/assets/pages/scripts/bs-carousel.js"
 					type="text/javascript"></script>
 				<script type="text/javascript">
