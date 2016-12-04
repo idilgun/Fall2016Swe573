@@ -1,78 +1,7 @@
-<!DOCTYPE html>
-<!--
-Template: Metronic Frontend Freebie - Responsive HTML Template Based On Twitter Bootstrap 3.3.4
-Version: 1.0.0
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
--->
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="en" ng-app="registerModule">
-<!--<![endif]-->
 
-<!-- Head BEGIN -->
-<head>
-<meta charset="utf-8">
-<title>Create new account | People's Health</title>
-
-<link rel="shortcut icon" href="favicon.ico">
-
-<!-- Fonts START -->
-<link
-	href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all"
-	rel="stylesheet" type="text/css">
-<!-- Fonts END -->
-
-<!-- Global styles START -->
-<link
-	href="${pageContext.request.contextPath}/resources/assets/plugins/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/assets/plugins/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Global styles END -->
-
-<!-- Page level plugin styles START -->
-<link
-	href="${pageContext.request.contextPath}/resources/assets/plugins/fancybox/source/jquery.fancybox.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/assets/plugins/uniform/css/uniform.default.css"
-	rel="stylesheet" type="text/css">
-<!-- Page level plugin styles END -->
-
-<!-- Theme styles START -->
-<link
-	href="${pageContext.request.contextPath}/resources/assets/pages/css/components.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/assets/corporate/css/style.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/assets/corporate/css/style-responsive.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/assets/corporate/css/themes/green.css"
-	rel="stylesheet" id="style-color">
-<link
-	href="${pageContext.request.contextPath}/resources/assets/corporate/css/custom.css"
-	rel="stylesheet">
-<!-- Theme styles END -->
-<script src="${pageContext.request.contextPath}/resources/js/angular.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/angular-route.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/registerScript.js"></script>
-</head>
-<!-- Head END -->
-
-<!-- Body BEGIN -->
-<body class="corporate" ng-controller="registerController">
-
-	<!-- BEGIN TOP BAR -->
+<div ng-app="mainApp">
+<div ng-controller="registerController">
+<!-- BEGIN TOP BAR -->
 	<div class="pre-header">
 		<div class="container">
 			<div class="row">
@@ -86,8 +15,8 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 				<!-- BEGIN TOP BAR MENU -->
 				<div class="col-md-6 col-sm-6 additional-nav">
 					<ul class="list-unstyled list-inline pull-right">
-						<li><a href="page-login.jsp">Log In</a></li>
-						<li><a href="page-reg-page.jsp">Sign Up</a></li>
+						<li><a href="#/loginPage">Log In</a></li>
+						<li><a href="#/signUpPage">Sign Up</a></li>
 					</ul>
 				</div>
 				<!-- END TOP BAR MENU -->
@@ -107,9 +36,9 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 			<div class="header-navigation pull-right font-transform-inherit">
 				<ul>
 
-					<li><a href="index.jsp">Home</a></li>
+					<li><a href="#/">Home</a></li>
 
-					<li><a href="page-faq.jsp">BMI</a></li>
+					<li><a href="#/bmi">BMI</a></li>
 
 					<li><a href="page-services.jsp">Food and Activity</a></li>
 
@@ -324,28 +253,5 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 		</div>
 		
 	</div>
-	
-
-
-
-
-	<!-- Load javascripts at bottom, this will reduce page load time -->
-	<!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
-	<!--[if lt IE 9]>
-    <script src="${pageContext.request.contextPath}/resources/assets/plugins/respond.min.js"></script>
-    <![endif]-->
-
-	
-	<!-- END CORE PLUGINS -->
-
-	<!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
-
-
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/corporate/scripts/layout.js"
-		type="text/javascript"></script>
-	
-	<!-- END PAGE LEVEL JAVASCRIPTS -->
-</body>
-<!-- END BODY -->
-</html>
+	</div>
+</div>

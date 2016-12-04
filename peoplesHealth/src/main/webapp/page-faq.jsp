@@ -121,7 +121,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
           <!-- BEGIN CONTENT -->
           <div class="col-md-12 col-sm-12">
             <h1>BMI Overview</h1>
-            <h2>Welcome {{name}}</h2>
+            <h2>Welcome {{name}}!</h2>
             <div class="content-page">
               <div class="row">
                 <div class="col-md-3 col-sm-3">

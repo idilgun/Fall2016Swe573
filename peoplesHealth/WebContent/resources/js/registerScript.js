@@ -5,16 +5,13 @@ var loginApp = angular.module('registerModule',['ngRoute']);
 loginApp.config(function($routeProvider) {    
 	$routeProvider
         .when('/', {
-        	controller: 'loginController',
-        	templateUrl: 'page-login.jsp'
+        	templateUrl: 'pages/welcome.jsp'
         })
         .when('/bmi', {
-        	controller: 'bmiController',
-        	templateUrl: 'page-faq.jsp'
+        	templateUrl: 'pages/bmi.jsp'
         })
         .otherwise({
-        	controller: 'loginController',
-        	redirectTo: '/page-faq.jsp'
+        	redirectTo: 'pages/welcome.jsp'
         });
 });
 
@@ -45,7 +42,7 @@ loginApp.factory('NameService', function() {
 
 
 
-loginApp.controller('registerController', ['$scope','$http', '$window', function($scope,  $http, $window){
+loginApp.controller('registerController', ['$scope','$http', '$window','NameService','$location', function($scope,  $http, $window, NameService, $location){
 	
 	$scope.signUp_gender = "";
 	$scope.signUp_name = "";
@@ -84,21 +81,21 @@ loginApp.controller('registerController', ['$scope','$http', '$window', function
 		 if(location.hostname == "localhost"){
 			 $http.post('../peoplesHealth/newUser', user, {'Content-Type': 'application/json'})
 		        .success(function (data, status, headers, config) {
-		        	console.log("got it !");
-		        	$window.location.href = '/peoplesHealth/page-faq.jsp';
+		        	NameService.setName(user.name);
+			    	$location.path('/bmi');
 		        })
 		        .error(function (data, status, header, config) {
-		        	console.log("error !");
+		        	window.alert("please try again");
 		        }); 
 		 }
 		 else{
 			 $http.post('../newUser', user, {'Content-Type': 'application/json'})
 		        .success(function (data, status, headers, config) {
-		        	console.log("got it !");
-		        	$window.location.href = '/page-faq.jsp';
+		        	NameService.setName(data.name);
+			    	$location.path('/bmi');
 		        })
 		        .error(function (data, status, header, config) {
-		        	console.log("error !");
+		        	window.alert("please try again");
 		        });
 		 }
      };
@@ -110,10 +107,8 @@ loginApp.controller('registerController', ['$scope','$http', '$window', function
 loginApp.controller('loginController', ['$scope','$http', '$window','NameService', '$location', function($scope,  $http, $window, NameService, $location){
 	$scope.login_email = "";
 	$scope.login_password = "";
-	
-	
+
 	$scope.login = function () {
-		var name = NameService.getName();
 		if(location.hostname == "localhost"){
 			$http
 		    .get('../peoplesHealth/authorizeUser', {
@@ -125,10 +120,9 @@ loginApp.controller('loginController', ['$scope','$http', '$window','NameService
 		     .success(function (data, status, headers, config) {
 		    	 NameService.setName(data.name);
 		    	 $location.path('/bmi');
-		    	 //$scope.$apply();
 		     })
 		     .error(function (data, status, headers, config) {
-		    	 window.alert("wrong password");
+		    	 window.alert("The password you entered is incorrect");
 	        });
 		}
 		else{
@@ -140,10 +134,11 @@ loginApp.controller('loginController', ['$scope','$http', '$window','NameService
 		        }
 		     }, {'Accept': 'text/plain;charset=ISO-8859-1', 'Content-Type': 'text/plain'})
 		     .success(function (data, status, headers, config) {
-		    	 $window.location.href = '/page-faq.jsp';
+		    	 NameService.setName(data.name);
+		    	 $location.path('/bmi');
 		     })
 		     .error(function (data, status, headers, config) {
-		    	 window.alert("wrong password");
+		    	 window.alert("The password you entered is incorrect");
 	        });
 		}
 		
@@ -152,7 +147,4 @@ loginApp.controller('loginController', ['$scope','$http', '$window','NameService
 
 loginApp.controller('bmiController', ['$scope','$http', '$window','NameService', function($scope, $http, $window, NameService){
 	$scope.name = NameService.getName();
-	console.log(NameService.getName());
-	NameService.setName("aaa");
-	console.log(NameService.getName());
 }]);
