@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.idil.peoplesHealth.dao.UserDao;
 import com.idil.peoplesHealth.dao.UserDao;
+import com.idil.peoplesHealth.domain.Message;
 import com.idil.peoplesHealth.domain.User;
 import com.idil.peoplesHealth.util.MailSender;
 import com.idil.peoplesHeath.USDA.response.SearchByNameResponse;
@@ -80,12 +81,12 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/forgotPassword" , method = RequestMethod.GET)
-	public ResponseEntity<String> sendPasswordMail(@RequestParam String email){
+	public ResponseEntity<Message> sendPasswordMail(@RequestParam String email){
 		
 		User user = userDao.getUserDetails(email);
 		
 		if(user == null){
-			ResponseEntity<String> response = new ResponseEntity<String>("user doesn't exist", HttpStatus.BAD_REQUEST);
+			ResponseEntity<Message> response = new ResponseEntity<Message>(new Message("This email is not registered to People's Health"), HttpStatus.BAD_REQUEST);
 			return response;
 		}
 		
@@ -93,10 +94,10 @@ public class UserController {
 		
 		try {
 			ms.sendForgottenPasswordMailTo(user, javaMailSender);
-			ResponseEntity<String> response = new ResponseEntity<String>("mail sent", HttpStatus.OK);
+			ResponseEntity<Message> response = new ResponseEntity<Message>(new Message("Your password has been sent to your mail"), HttpStatus.OK);
 			return response;
 		} catch (MessagingException e) {
-			ResponseEntity<String> response = new ResponseEntity<String>("try again", HttpStatus.INTERNAL_SERVER_ERROR);
+			ResponseEntity<Message> response = new ResponseEntity<Message>(new Message("Please try again"), HttpStatus.INTERNAL_SERVER_ERROR);
 			return response;
 		}
 	}

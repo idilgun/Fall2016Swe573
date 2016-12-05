@@ -11,6 +11,9 @@ app.config(function($routeProvider) {
 		.when('/loginPage', {
 			templateUrl: 'pages/login.jsp'
 		})
+		.when('/forgotPassword', {
+			templateUrl: 'pages/forgotPassword.jsp'
+		})
 		.when('/bmi', {
 			resolve: {
 				"check" : function($location, $rootScope){

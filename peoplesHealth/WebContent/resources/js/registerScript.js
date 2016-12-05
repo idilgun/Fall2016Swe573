@@ -208,3 +208,32 @@ loginApp.controller('bmiController', [
 			};
 
 		} ]);
+
+loginApp.controller('forgottenController', [ '$scope', '$http', '$window',
+		'$location', function($scope, $http, $window, $location) {
+
+			$scope.getUrl = function() {
+				if (location.hostname == "localhost") {
+					return "http://" + location.host + "/peoplesHealth";
+				} else {
+					return "http://" + location.host;
+				}
+			};
+
+			$scope.sendPassword = function() {
+				$http.get($scope.getUrl() + '/forgotPassword', {
+					params : {
+						email : $scope.forgotten_email,
+					}
+				}, {
+					'Accept' : 'text/plain;charset=ISO-8859-1',
+					'Content-Type' : 'text/plain'
+				}).success(function(message, status, headers, config) {
+					window.alert(message.message);
+					$location.path('/loginPage');
+				}).error(function(message, status, headers, config) {
+					window.alert(message.message);
+				});
+			};
+
+		} ]);
