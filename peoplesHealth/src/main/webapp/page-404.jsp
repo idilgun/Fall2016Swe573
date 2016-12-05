@@ -74,12 +74,6 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
       </div>
       <!-- END TOP BAR LEFT PART -->
       <!-- BEGIN TOP BAR MENU -->
-      <div class="col-md-6 col-sm-6 additional-nav">
-        <ul class="list-unstyled list-inline pull-right">
-          <li><a href="page-login.jsp">Log In</a></li>
-          <li><a href="page-reg-page.jsp">Sign Up</a></li>
-        </ul>
-      </div>
       <!-- END TOP BAR MENU -->
     </div>
   </div>
@@ -88,24 +82,12 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 <!-- BEGIN HEADER -->
 <div class="header">
   <div class="container">
-    <a class="site-logo" href="index.jsp"><img src="${pageContext.request.contextPath}/resources/assets/corporate/img/logos/peoplesHealth.png" alt="people's health"></a>
+    <a class="site-logo"><img src="${pageContext.request.contextPath}/resources/assets/corporate/img/logos/peoplesHealth.png" alt="people's health"></a>
 
     <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
     <!-- BEGIN NAVIGATION -->
-    <div class="header-navigation pull-right font-transform-inherit">
-      <ul>
-
-        <li><a href="index.jsp">Home</a></li>
-
-        <li><a href="page-faq.jsp">BMI</a></li>
-
-        <li><a href="page-services.jsp">Food and Activity</a></li>
-
-        <li><a href="portfolio-2.jsp">Analytics</a></li>
-
-      </ul>
-    </div>
+    
     <!-- END NAVIGATION -->
   </div>
 </div>
@@ -125,7 +107,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                   <h3>Oops!  You're lost.</h3>
                   <p>
                      We can not find the page you're looking for.<br>
-                     <a href="index.jsp" class="link">Return home</a>
+
                   </p>
                </div>
             </div>
@@ -141,10 +123,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
     <!--[if lt IE 9]>
     <script src="assets/plugins/respond.min.js"></script>
     <![endif]--> 
-    <script src="${pageContext.request.contextPath}/resources/assets/plugins/jquery.min.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
-    <script src="${pageContext.request.contextPath}/resources/assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
+
     <!-- END CORE PLUGINS -->
 
     <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
