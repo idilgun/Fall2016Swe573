@@ -1,14 +1,4 @@
-
 var loginApp = angular.module('registerModule', [ 'ngRoute', 'mainApp' ]);
-
-loginApp.service('authenticationService', function() {
-	return {
-		userCredentials : {
-			email : $scope.login_email,
-			password : $scope.login_password
-		}
-	};
-});
 
 loginApp.factory('UserService', function() {
 	var user = {};
@@ -34,6 +24,14 @@ loginApp.controller('registerController', [
 		'$location',
 		'$rootScope',
 		function($scope, $http, $window, UserService, $location, $rootScope) {
+
+			$scope.getUrl = function() {
+				if (location.hostname == "localhost") {
+					return "http://" + location.host + "/peoplesHealth";
+				} else {
+					return "http://" + location.host;
+				}
+			};
 
 			$scope.signUp_gender = "";
 			$scope.signUp_name = "";
@@ -74,34 +72,21 @@ loginApp.controller('registerController', [
 							+ $scope.signUp_dateOfBirth_day
 				};
 
-				//console.log(user);
-				// we need to add peoplesHealth to the url for local host and remove it for deployment???
+				// console.log(user);
+				// we need to add peoplesHealth to the url for local host and
+				// remove it for deployment???
 
-				if (location.hostname == "localhost") {
-					$http.post('../peoplesHealth/newUser', user, {
-						'Content-Type' : 'application/json'
-					}).success(function(data, status, headers, config) {
-						$rootScope.email = $scope.signUp_email;
-						$rootScope.password = $scope.signUp_password;
-						$rootScope.loggedIn = true;
-						UserService.setUser(user);
-						$location.path('/bmi');
-					}).error(function(data, status, header, config) {
-						window.alert("please try again");
-					});
-				} else {
-					$http.post('../newUser', user, {
-						'Content-Type' : 'application/json'
-					}).success(function(data, status, headers, config) {
-						$rootScope.email = $scope.signUp_email;
-						$rootScope.password = $scope.signUp_password;
-						$rootScope.loggedIn = true;
-						UserService.setUser(user);
-						$location.path('/bmi');
-					}).error(function(data, status, header, config) {
-						window.alert("please try again");
-					});
-				}
+				$http.post($scope.getUrl() + '/newUser', user, {
+					'Content-Type' : 'application/json'
+				}).success(function(data, status, headers, config) {
+					$rootScope.email = $scope.signUp_email;
+					$rootScope.password = $scope.signUp_password;
+					$rootScope.loggedIn = true;
+					UserService.setUser(user);
+					$location.path('/bmi');
+				}).error(function(data, status, header, config) {
+					window.alert("please try again");
+				});
 			};
 
 		} ]);
@@ -112,111 +97,114 @@ loginApp.controller('loginController', [ '$scope', '$http', '$window',
 			$scope.login_email = "";
 			$scope.login_password = "";
 
-			$scope.login = function() {
+			$scope.getUrl = function() {
 				if (location.hostname == "localhost") {
-					$http.get('../peoplesHealth/authorizeUser', {
-						params : {
-							email : $scope.login_email,
-							password : $scope.login_password
-						}
-					}, {
-						'Accept' : 'text/plain;charset=ISO-8859-1',
-						'Content-Type' : 'text/plain'
-					}).success(function(data, status, headers, config) {
-						$rootScope.email = $scope.login_email;
-						$rootScope.password = $scope.login_password;
-						$rootScope.loggedIn = true;
-						UserService.setUser(data);
-						$location.path('/bmi');
-					}).error(function(data, status, headers, config) {
-						window.alert("The password you entered is incorrect");
-					});
+					return "http://" + location.host + "/peoplesHealth";
 				} else {
-					$http.get('../authorizeUser', {
-						params : {
-							email : $scope.login_email,
-							password : $scope.login_password
-						}
-					}, {
-						'Accept' : 'text/plain;charset=ISO-8859-1',
-						'Content-Type' : 'text/plain'
-					}).success(function(data, status, headers, config) {
-						$rootScope.email = $scope.login_email;
-						$rootScope.password = $scope.login_password;
-						$rootScope.loggedIn = true;
-						UserService.setUser(user);
-						$location.path('/bmi');
-					}).error(function(data, status, headers, config) {
-						window.alert("The password you entered is incorrect");
-					});
+					return "http://" + location.host;
 				}
+			};
 
+			$scope.login = function() {
+				$http.get($scope.getUrl() + '/authorizeUser', {
+					params : {
+						email : $scope.login_email,
+						password : $scope.login_password
+					}
+				}, {
+					'Accept' : 'text/plain;charset=ISO-8859-1',
+					'Content-Type' : 'text/plain'
+				}).success(function(data, status, headers, config) {
+					$rootScope.email = $scope.login_email;
+					$rootScope.password = $scope.login_password;
+					$rootScope.loggedIn = true;
+					UserService.setUser(data);
+					$location.path('/bmi');
+				}).error(function(data, status, headers, config) {
+					window.alert("The password you entered is incorrect");
+				});
 			};
 		} ]);
 
-loginApp.controller('bmiController', [ '$scope', '$http', '$window',
-		'UserService', '$rootScope',
-		function($scope, $http, $window, UserService, $rootScope) {
-			var user = UserService.getUser();
-			$scope.name = user.name;
-			$scope.bmi_text = "Please enter weight and height to view BMI";
-			console.log(user.weight);
-			if(user.weight!=null && user.height!=null){
-				var bmi = parseFloat(user.weight / (user.height/100 * user.height/100)).toFixed(2);
-				var bmiMeaning = "normal weighted";
-				if(bmi<18.5){
-					bmiMeaning = "underweight";
+loginApp.controller('bmiController', [
+		'$scope',
+		'$http',
+		'$window',
+		'UserService',
+		'$rootScope',
+		'$location',
+		function($scope, $http, $window, UserService, $rootScope, $location) {
+
+			$scope.getUrl = function() {
+				if (location.hostname == "localhost") {
+					return "http://" + location.host + "/peoplesHealth";
+				} else {
+					return "http://" + location.host;
 				}
-				else if (bmi<23){
+			};
+
+			$scope.updateBmi = function() {
+				var user = UserService.getUser();
+				$scope.name = user.name;
+				$scope.bmi_text = "Please enter weight and height to view BMI";
+				console.log(user.weight);
+				if (user.weight != null && user.height != null) {
+					var bmi = parseFloat(
+							user.weight
+									/ (user.height / 100 * user.height / 100))
+							.toFixed(2);
+					var bmiMeaning = "normal weighted";
+					if (bmi < 18.5) {
+						bmiMeaning = "underweight";
+					} else if (bmi < 23) {
+					} else if (bmi < 25) {
+						bmiMeaning = "overweight, at risk";
+					} else if (bmi < 30) {
+						bmiMeaning = "overweight, moderately obese";
+					} else {
+						bmiMeaning = "overweight, severely obese";
+					}
+					$scope.bmi_text = "Your BMI is " + bmi
+							+ " That means that you are " + bmiMeaning + ".";
 				}
-				else if(bmi<25){
-					bmiMeaning = "overweight — at risk";
+			};
+
+			$scope.setWeightHeight = function() {
+				var user = UserService.getUser();
+				if (user.weight == null) {
+					$scope.user_weight = "unknown";
+				} else {
+					$scope.user_weight = user.weight + " kg";
+					$scope.weight = user.weight;
 				}
-				else if(bmi<30){
-					bmiMeaning = "overweight — moderately obese";
+				if (user.height == null) {
+					$scope.user_height = "unknown";
+				} else {
+					$scope.user_height = user.height + " cm";
+					$scope.height = user.height;
 				}
-				else{
-					bmiMeaning = "overweight — severely obese";
-				}
-				$scope.bmi_text = "Your BMI is " + bmi + 
-							" That means that you are " + bmiMeaning + ".";
-			}
-			
+			};
+
+			$scope.updateBmi();
+			$scope.setWeightHeight();
+
+			$scope.updateWeightHeight = function() {
+				var user = UserService.getUser();
+				user.weight = $scope.weight;
+				user.height = $scope.height;
+
+				$http.post($scope.getUrl() + '/updateUserInformation', user, {
+					'Content-Type' : 'application/json'
+				}).success(function(data, status, headers, config) {
+					$rootScope.email = $scope.signUp_email;
+					UserService.setUser(user);
+					$scope.setWeightHeight();
+					$scope.updateBmi();
+					$scope.tab = 1;
+
+				}).error(function(data, status, header, config) {
+					window.alert("please try again");
+				});
+			};
+
 		} ]);
-
-loginApp.controller('weightHeightController', [ '$scope', '$http', '$window',
-                               		'UserService', '$rootScope', '$location',
-                               		function($scope, $http, $window, UserService, $rootScope, $location) {
-	$scope.updateWeight = function() {
-		var user = UserService.getUser();
-		user.weight = $scope.weight;
-		if (location.hostname == "localhost") {
-			$http.post('../peoplesHealth/updateUserInformation', user, {
-				'Content-Type' : 'application/json'
-			}).success(function(data, status, headers, config) {
-				$rootScope.email = $scope.signUp_email;
-				UserService.setUser(user);
-			}).error(function(data, status, header, config) {
-				window.alert("please try again");
-			});
-		};
-	};
-	
-	$scope.updateHeight = function() {
-		var user = UserService.getUser();
-		user.height = $scope.height;
-		if (location.hostname == "localhost") {
-			$http.post('../peoplesHealth/updateUserInformation', user, {
-				'Content-Type' : 'application/json'
-			}).success(function(data, status, headers, config) {
-				$rootScope.email = $scope.signUp_email;
-				UserService.setUser(user);
-				window.alert("heightUpdated");
-			}).error(function(data, status, header, config) {
-				window.alert("please try again");
-			});
-		};
-	};
-	
-}]);
-

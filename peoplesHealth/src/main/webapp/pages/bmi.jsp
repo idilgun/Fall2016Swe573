@@ -102,37 +102,23 @@
 																Update Weight and Height </a>
 														</h4>
 													</div>
-													<div ng-controller="weightHeightController"
-														class="panel-collapse collapse  in" id="accordion2_1">
+													<div class="panel-collapse collapse  in" id="accordion2_1">
 														<div class="panel-body">
-
-
-
+															<p>Change fields below to update weight or height. Your BMI will be updated according to the new values you enter.</p>
 															<form class="form-horizontal form-without-legend"
 																role="form">
 																<div class="form-group">
 																	<label for="weight" class="col-lg-4 control-label">Weight
-																		(kg) <span class="require">*</span>
+																		(kg)
 																	</label>
 																	<div class="col-lg-8">
 																		<input type="text" class="form-control"
 																			ng-model="weight">
 																	</div>
 																</div>
-																<div class="row">
-																	<div
-																		class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
-																		<button type="submit" class="btn btn-primary"
-																			ng-click="updateWeight()">Update Weight</button>
-																	</div>
-																</div>
-															</form>
-
-															<form class="form-horizontal form-without-legend"
-																role="form">
 																<div class="form-group">
 																	<label for="weight" class="col-lg-4 control-label">Height
-																		(cm) <span class="require">*</span>
+																		(cm)
 																	</label>
 																	<div class="col-lg-8">
 																		<input type="text" class="form-control"
@@ -143,10 +129,11 @@
 																	<div
 																		class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
 																		<button type="submit" class="btn btn-primary"
-																			ng-click="updateHeight()">Update Height</button>
+																			ng-click="updateWeightHeight()">Update</button>
 																	</div>
 																</div>
 															</form>
+															
 														</div>
 													</div>
 												</div>

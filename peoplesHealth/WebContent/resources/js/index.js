@@ -16,7 +16,6 @@ app.config(function($routeProvider) {
 				"check" : function($location, $rootScope){
 					if(!$rootScope.loggedIn){
 						$location.path('/loginPage');
-						console.log("leggedIn: " + $rootScope.loggedIn);
 					}
 				}
 			},
@@ -27,7 +26,6 @@ app.config(function($routeProvider) {
 				"check" : function($location, $rootScope){
 					if(!$rootScope.loggedIn){
 						$location.path('/loginPage');
-						console.log("leggedIn: " + $rootScope.loggedIn);
 					}
 				}
 			},
@@ -38,7 +36,6 @@ app.config(function($routeProvider) {
 				"check" : function($location, $rootScope){
 					if(!$rootScope.loggedIn){
 						$location.path('/loginPage');
-						console.log("leggedIn: " + $rootScope.loggedIn);
 					}
 				}
 			},
