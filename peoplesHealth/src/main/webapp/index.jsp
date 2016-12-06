@@ -4,6 +4,8 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/angular-datepicker.css">
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/angular.min.js"></script>
@@ -13,10 +15,12 @@
 	type="text/javascript"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/registerScript.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/foodActivityScript.js"></script>
 
+<script
+	src="${pageContext.request.contextPath}/resources/js/angular-datepicker.js"></script>
 
-
-<meta charset="utf-8">
 <title>People's Health</title>
 
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
