@@ -13,8 +13,7 @@
 					<!-- BEGIN TOP BAR MENU -->
 					<div class="col-md-6 col-sm-6 additional-nav">
 						<ul class="list-unstyled list-inline pull-right">
-							<li><a href="#/loginPage">Log In</a></li>
-							<li><a href="#/signUpPage">Sign Up</a></li>
+							<li><a href="#/loginPage" ng-click="logOut()">Log Out</a></li>
 						</ul>
 					</div>
 					<!-- END TOP BAR MENU -->
@@ -56,6 +55,7 @@
 					<div class="col-md-12 col-sm-12">
 						<h1>BMI Overview</h1>
 						<h2>Welcome {{name}}!</h2>
+						<h3 style="color:#38B630;">{{noteToSelf}}</h3>
 						<div class="content-page">
 							<div class="row">
 								<div class="col-md-3 col-sm-3">
@@ -152,8 +152,25 @@
 														</h4>
 													</div>
 													<div class="panel-collapse collapse  in" id="accordion3_1">
-														<div class="panel-body">
-															<p>Form for note</p>
+														<div class="panel-body"> 
+															<form class="form-horizontal form-without-legend"
+																role="form">
+																<div class="form-group">
+																	<label for="notes" class="col-lg-4 control-label">Write a note to yourself
+																	</label>
+																	<div class="col-lg-8">
+																		<input type="text" class="form-control"
+																			ng-model="newNote">
+																	</div>
+																</div>
+																<div class="row">
+																	<div
+																		class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
+																		<button type="submit" class="btn btn-primary"
+																			ng-click="updateNoteToSelf()">Submit</button>
+																	</div>
+																</div>
+															</form>
 
 														</div>
 													</div>

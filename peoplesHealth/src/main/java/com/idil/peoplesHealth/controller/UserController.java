@@ -83,23 +83,30 @@ public class UserController {
 	@RequestMapping(value = "/forgotPassword" , method = RequestMethod.GET)
 	public ResponseEntity<Message> sendPasswordMail(@RequestParam String email){
 		
-		User user = userDao.getUserDetails(email);
-		
-		if(user == null){
-			ResponseEntity<Message> response = new ResponseEntity<Message>(new Message("This email is not registered to People's Health"), HttpStatus.BAD_REQUEST);
-			return response;
+		try{
+			User user = userDao.getUserDetails(email);
+			
+			if(user == null){
+				ResponseEntity<Message> response = new ResponseEntity<Message>(new Message("This email is not registered to People's Health"), HttpStatus.BAD_REQUEST);
+				return response;
+			}
+			
+			MailSender ms = new MailSender();
+			
+			try {
+				ms.sendForgottenPasswordMailTo(user, javaMailSender);
+				ResponseEntity<Message> response = new ResponseEntity<Message>(new Message("Your password has been sent to your mail"), HttpStatus.OK);
+				return response;
+			} catch (MessagingException e) {
+				ResponseEntity<Message> response = new ResponseEntity<Message>(new Message("Please try again"), HttpStatus.INTERNAL_SERVER_ERROR);
+				e.printStackTrace();
+				return response;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ResponseEntity<Message>(new Message("Please try again"), HttpStatus.UNAUTHORIZED);
 		}
 		
-		MailSender ms = new MailSender();
-		
-		try {
-			ms.sendForgottenPasswordMailTo(user, javaMailSender);
-			ResponseEntity<Message> response = new ResponseEntity<Message>(new Message("Your password has been sent to your mail"), HttpStatus.OK);
-			return response;
-		} catch (MessagingException e) {
-			ResponseEntity<Message> response = new ResponseEntity<Message>(new Message("Please try again"), HttpStatus.INTERNAL_SERVER_ERROR);
-			return response;
-		}
 	}
 	
 	/**

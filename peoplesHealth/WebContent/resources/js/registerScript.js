@@ -146,6 +146,7 @@ loginApp.controller('bmiController', [
 			$scope.updateBmi = function() {
 				var user = UserService.getUser();
 				$scope.name = user.name;
+				$scope.noteToSelf = "Remember you said to yourself: " + user.notes;
 				$scope.bmi_text = "Please enter weight and height to view BMI";
 				console.log(user.weight);
 				if (user.weight != null && user.height != null) {
@@ -205,6 +206,28 @@ loginApp.controller('bmiController', [
 				}).error(function(data, status, header, config) {
 					window.alert("please try again");
 				});
+			};
+			
+			$scope.updateNoteToSelf = function() {
+				var user = UserService.getUser();
+				user.notes = $scope.newNote;
+
+				$http.post($scope.getUrl() + '/updateUserInformation', user, {
+					'Content-Type' : 'application/json'
+				}).success(function(data, status, headers, config) {
+					$rootScope.email = $scope.signUp_email;
+					UserService.setUser(user);
+					$scope.setWeightHeight();
+					$scope.updateBmi();
+					$scope.tab = 1;
+
+				}).error(function(data, status, header, config) {
+					window.alert("please try again");
+				});
+			};
+			
+			$scope.logOut = function() {
+				$rootScope.loggedIn = false;
 			};
 
 		} ]);
