@@ -146,7 +146,9 @@ loginApp.controller('bmiController', [
 			$scope.updateBmi = function() {
 				var user = UserService.getUser();
 				$scope.name = user.name;
-				$scope.noteToSelf = "Remember you said to yourself: " + user.notes;
+				if(user.notes!=null){
+					$scope.noteToSelf = "Remember you said to yourself: " + user.notes;
+				}
 				$scope.bmi_text = "Please enter weight and height to view BMI";
 				console.log(user.weight);
 				if (user.weight != null && user.height != null) {
