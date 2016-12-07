@@ -15,6 +15,9 @@ foodActivityApp
 							$scope.foodName = "";
 							$scope.foodGroup = "";
 							$scope.selectedItem = {};
+							$scope.selectedUnit = "";
+							$scope.foodAmount = "";
+							$scope.selectedNdbno = "";
 
 							$scope.initDatePicker = function() {
 								var currentDate = new Date();
@@ -44,6 +47,9 @@ foodActivityApp
 							};
 
 							$scope.searchFoodByName = function() {
+								
+								$scope.showItems = true;
+								
 								$http
 										.get(
 												$scope.getUrl()
@@ -69,11 +75,46 @@ foodActivityApp
 												});
 							};
 
-							console.log($scope.$parent.selected);
 
-							$scope.printSelection = function(item) {
-								console.log("The function works");
-								console.log(item);
+							$scope.selectItem = function(item) {
+								
+								$scope.showItems = false;
+								$scope.showSelectedItem = true;
+								$scope.selectedItemName = item.name;
+								$scope.selectedNdbno = item.ndbno;
+								
+								$http
+								.get(
+										$scope.getUrl()
+												+ '/foodItemUnits/'
+												+ item.ndbno,
+										{},
+										{
+											'Accept' : 'text/plain;charset=ISO-8859-1',
+											'Content-Type' : 'text/plain'
+										})
+								.success(
+										function(data, status, headers,
+												config) {
+											console.log(data);
+											$scope.showSelectedItemUnits = true;
+											$scope.unitOptions = data;
+											$scope.selectedUnit = data[0];
+										})
+								.error(
+										function(data, status, headers,
+												config) {
+											window
+													.alert("Something went wrong, please try again.");
+										});
+								
+							};
+							
+							$scope.addFoodItem = function(){
+								console.log($scope.selectedUnit);
+								console.log($scope.foodAmount);
+								console.log($scope.selectedNdbno);
+								console.log($rootScope.email);
 							};
 
 						} ]);

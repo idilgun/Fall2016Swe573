@@ -80,7 +80,8 @@
 														<td>Day <select class="form-control"
 															name='foodConsumption_date_day'
 															id="foodConsumption_date_day"
-															ng-model="foodConsumption_date_day" ng-init="initDatePicker()">
+															ng-model="foodConsumption_date_day"
+															ng-init="initDatePicker()">
 																<option value='1'>1</option>
 																<option value='2'>2</option>
 																<option value='3'>3</option>
@@ -137,7 +138,7 @@
 														</select></td>
 													</tr>
 												</table>
-												
+
 												<form class="form-horizontal form-without-legend"
 													role="form">
 													<div class="form-group">
@@ -209,13 +210,36 @@
 													</div>
 												</form>
 
-												<div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
-													<div class="list-group">
-        												<button class="list-group-item"  ng-repeat="item in foodOptions track by item.ndbno" ng-model="selectedItem" 
-         													 ng-click="printSelection(item)">
-           													{{item.name}}
-        												</button>
-    												</div>
+												<div
+													class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
+													<div ng-show="showItems" class="list-group">
+														<button class="list-group-item"
+															ng-repeat="item in foodOptions track by item.ndbno"
+															ng-model="selectedItem" ng-click="selectItem(item)">
+															{{item.name}}</button>
+													</div>
+													<div ng-show="showSelectedItem" class="list-group">
+														<button disabled class="list-group-item"
+															ng-model="selectedItem">{{selectedItemName}}</button>
+													</div>
+													<div ng-show="showSelectedItemUnits"
+														class="col-lg-8 padding-left-0 padding-top-20">
+
+														<table>
+															<tr>
+																<td>Amount<input type="text" class="form-control" id="foodAmount"
+																ng-model="foodAmount"></td>
+																<td>Unit<select class="form-control"
+																	name='selectedUnit' id="selectedUnit"
+																	ng-model="selectedUnit">
+																		<option ng-repeat="unit in unitOptions"
+																			value='{{unit}}'>{{unit}}</option>
+																</select></td>
+																<td><p></p><button type="submit" class="btn btn-primary"
+																ng-click="addFoodItem()">Add</button></td>
+															</tr>
+														</table>														
+													</div>
 												</div>
 
 
