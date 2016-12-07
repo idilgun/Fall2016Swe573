@@ -80,7 +80,7 @@
 														<td>Day <select class="form-control"
 															name='foodConsumption_date_day'
 															id="foodConsumption_date_day"
-															ng-model="foodConsumption_date_day">
+															ng-model="foodConsumption_date_day" ng-init="initDatePicker()">
 																<option value='1'>1</option>
 																<option value='2'>2</option>
 																<option value='3'>3</option>
@@ -132,12 +132,12 @@
 														<td>Year <select class="form-control" name='day'
 															id="foodConsumption_date_year"
 															ng-model="foodConsumption_date_year">
-																<option value='2014'>2016</option>
-																<option value='2014'>2017</option>
+																<option value='2016'>2016</option>
+																<option value='2017'>2017</option>
 														</select></td>
 													</tr>
 												</table>
-
+												
 												<form class="form-horizontal form-without-legend"
 													role="form">
 													<div class="form-group">
@@ -209,13 +209,13 @@
 													</div>
 												</form>
 
-												<div>
-													<ul>
-        												<li ng-repeat="item in foodOptions track by item.ndbno" ng-class="{active:($parent.selected == $index)}" 
-         													 ng-click="$parent.selected = $index; printSelection();">
+												<div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
+													<div class="list-group">
+        												<button class="list-group-item"  ng-repeat="item in foodOptions track by item.ndbno" ng-model="selectedItem" 
+         													 ng-click="printSelection(item)">
            													{{item.name}}
-        												</li>
-    												</ul>
+        												</button>
+    												</div>
 												</div>
 
 
