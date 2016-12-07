@@ -18,13 +18,20 @@ foodActivityApp
 							$scope.selectedUnit = "";
 							$scope.foodAmount = "";
 							$scope.selectedNdbno = "";
+							
+							$scope.logOut = function() {
+								$rootScope.loggedIn = false;
+							};
 
 							$scope.initDatePicker = function() {
 								var currentDate = new Date();
 
-								$scope.foodConsumption_date_year = (currentDate.getUTCFullYear()).toString();
-								$scope.foodConsumption_date_day = currentDate.getUTCDate().toString();
-								$scope.foodConsumption_date_month = (currentDate.getUTCMonth() + 1).toString();
+								$scope.foodConsumption_date_year = (currentDate
+										.getUTCFullYear()).toString();
+								$scope.foodConsumption_date_day = currentDate
+										.getUTCDate().toString();
+								$scope.foodConsumption_date_month = (currentDate
+										.getUTCMonth() + 1).toString();
 
 								$scope.todaysDate = $scope.foodConsumption_date_day
 										+ " / "
@@ -47,9 +54,12 @@ foodActivityApp
 							};
 
 							$scope.searchFoodByName = function() {
-								
+
 								$scope.showItems = true;
-								
+								$scope.showItemDetails = false;
+								$scope.showSelectedItem = false;
+								$scope.showSelectedItemUnits = false;
+
 								$http
 										.get(
 												$scope.getUrl()
@@ -75,46 +85,75 @@ foodActivityApp
 												});
 							};
 
-
 							$scope.selectItem = function(item) {
-								
+
 								$scope.showItems = false;
 								$scope.showSelectedItem = true;
 								$scope.selectedItemName = item.name;
 								$scope.selectedNdbno = item.ndbno;
-								
+
 								$http
-								.get(
-										$scope.getUrl()
-												+ '/foodItemUnits/'
-												+ item.ndbno,
-										{},
-										{
-											'Accept' : 'text/plain;charset=ISO-8859-1',
-											'Content-Type' : 'text/plain'
-										})
-								.success(
-										function(data, status, headers,
-												config) {
-											console.log(data);
-											$scope.showSelectedItemUnits = true;
-											$scope.unitOptions = data;
-											$scope.selectedUnit = data[0];
-										})
-								.error(
-										function(data, status, headers,
-												config) {
-											window
-													.alert("Something went wrong, please try again.");
-										});
-								
+										.get(
+												$scope.getUrl()
+														+ '/foodItemUnits/'
+														+ item.ndbno,
+												{},
+												{
+													'Accept' : 'text/plain;charset=ISO-8859-1',
+													'Content-Type' : 'text/plain'
+												})
+										.success(
+												function(data, status, headers,
+														config) {
+													console.log(data);
+													$scope.showSelectedItemUnits = true;
+													$scope.unitOptions = data;
+													$scope.selectedUnit = data[0];
+												})
+										.error(
+												function(data, status, headers,
+														config) {
+													window
+															.alert("Something went wrong, please try again.");
+												});
 							};
-							
-							$scope.addFoodItem = function(){
+
+							$scope.addFoodItem = function() {
 								console.log($scope.selectedUnit);
 								console.log($scope.foodAmount);
 								console.log($scope.selectedNdbno);
 								console.log($rootScope.email);
+							};
+
+							$scope.getDetailsOfItem = function() {
+								$http
+										.get(
+												$scope.getUrl()
+														+ '/foodDetails/'
+														+ $scope.selectedNdbno,
+												{
+													params : {
+														unit : $scope.selectedUnit,
+														amount : $scope.foodAmount
+													}
+												},
+												{
+													'Accept' : 'text/plain;charset=ISO-8859-1',
+													'Content-Type' : 'text/plain'
+												})
+										.success(
+												function(data, status, headers,
+														config) {
+													console.log(data);
+													$scope.nutritionValues = data;
+													$scope.showItemDetails = true;
+												})
+										.error(
+												function(data, status, headers,
+														config) {
+													window
+															.alert("Something went wrong, please try again.");
+												});
 							};
 
 						} ]);

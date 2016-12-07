@@ -423,6 +423,61 @@ public class FoodItem {
 	public void setCaffeineUnit(String caffeineUnit) {
 		this.caffeineUnit = caffeineUnit;
 	}
+
+	public void adjustByAmount(Double amount) {
+		
+		if(this.caffeine!=null){
+			this.caffeine = amount * this.caffeine;
+		}
+		if(this.calcium!=null){
+			this.calcium = amount * this.calcium;
+		}
+		if(this.calorie!=null){
+			this.calorie = amount * this.calorie;
+		}
+		if(this.carbohydrate!=null){
+			this.carbohydrate = amount * this.carbohydrate;
+		}
+		if(this.cholesterol!=null){
+			this.cholesterol = amount * this.cholesterol;
+		}
+		if(this.fat!=null){
+			this.fat = amount * this.fat;
+		}
+		if(this.fiber!=null){
+			this.fiber = amount * this.fiber;
+		}
+		if(this.iron!=null){
+			this.iron = amount * this.iron;
+		}
+		if(this.magnesium!=null){
+			this.magnesium = amount * this.magnesium;
+		}
+		if(this.phosphorus!=null){
+			this.phosphorus = amount * this.phosphorus;
+		}
+		if(this.potassium!=null){
+			this.potassium = amount * this.potassium;
+		}
+		if(this.protein!=null){
+			this.protein = amount * this.protein;
+		}
+		if(this.sodium!=null){
+			this.sodium = amount * this.sodium;
+		}
+		if(this.sugars!=null){
+			this.sugars = amount * this.sugars;
+		}
+		if(this.vitaminC!=null){
+			this.vitaminC = amount * this.vitaminC;
+		}
+		if(this.water!=null){
+			this.water = amount * this.water;
+		}
+		if(this.zinc!=null){
+			this.zinc = amount * this.zinc;
+		}		
+	}
 	
 	
 	

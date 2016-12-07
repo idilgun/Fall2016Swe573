@@ -13,8 +13,7 @@
 					<!-- BEGIN TOP BAR MENU -->
 					<div class="col-md-6 col-sm-6 additional-nav">
 						<ul class="list-unstyled list-inline pull-right">
-							<li><a href="#/loginPage">Log In</a></li>
-							<li><a href="#/signUpPage">Sign Up</a></li>
+							<li><a href="#/loginPage" ng-click="logOut()">Log Out</a></li>
 						</ul>
 					</div>
 					<!-- END TOP BAR MENU -->
@@ -227,19 +226,46 @@
 
 														<table>
 															<tr>
-																<td>Amount<input type="text" class="form-control" id="foodAmount"
-																ng-model="foodAmount"></td>
+																<td>Amount<input type="text" class="form-control"
+																	id="foodAmount" ng-model="foodAmount"></td>
 																<td>Unit<select class="form-control"
 																	name='selectedUnit' id="selectedUnit"
 																	ng-model="selectedUnit">
 																		<option ng-repeat="unit in unitOptions"
 																			value='{{unit}}'>{{unit}}</option>
 																</select></td>
-																<td><p></p><button type="submit" class="btn btn-primary"
-																ng-click="addFoodItem()">Add</button></td>
+																<td><p></p>
+																	<button type="submit" class="btn btn-primary"
+																		ng-click="getDetailsOfItem()">Get Details</button></td>
 															</tr>
-														</table>														
+														</table>
 													</div>
+
+													<div ng-show="showItemDetails" class="col-lg-8 padding-left-0 padding-top-20">
+
+														<table class="table">
+															<thead>
+																<tr>
+																	<th>Nutrient or Energy</th>
+																	<th>Amount</th>
+																	<th>Unit</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr
+																	ng-repeat="nutrientInfo in nutritionValues track by nutrientInfo.name">
+																	<td>{{nutrientInfo.name}}</td>
+																	<td>{{nutrientInfo.value}}</td>
+																	<td>{{nutrientInfo.unit}}</td>
+																</tr>
+															</tbody>
+														</table>
+														
+														<button type="submit" class="btn btn-primary"
+																		ng-click="addFoodItem()">Add</button>
+
+													</div>
+
 												</div>
 
 
