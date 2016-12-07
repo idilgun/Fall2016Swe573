@@ -71,8 +71,10 @@
 									<div class="tab-content">
 										<div id="tab-1" class="tab-pane row fade active in">
 											<div class="col-md-12">
-												<p>Today is <strong> {{todaysDate}} </strong> - select date below if you
-													would like to input food for a different date.</p>
+												<p>
+													Today is <strong> {{todaysDate}} </strong> - select date
+													below if you would like to input food for a different date.
+												</p>
 												<table>
 													<tr>
 														<td>Day <select class="form-control"
@@ -148,52 +150,52 @@
 													</div>
 													<div class="form-group">
 														<label for="foodGroup" class="col-lg-4 control-label">Select
-															a group for this food item</label> 
-															<div class="col-lg-8">
-															<select class="form-control"
-															name='foodGroup' id="foodGroup" ng-model="foodGroup">
-															<option value='Dairy and Egg Products'>Dairy and
-																Egg Products</option>
-															<option value='Spices and Herbs'>Spices and
-																Herbs</option>
-															<option value='Baby Foods'>Baby Foods</option>
-															<option value='Fats and Oils'>Fats and Oils</option>
-															<option value='Poultry Products'>Poultry
-																Products</option>
-															<option value='Soups, Sauces, and Gravies'>Soups,
-																Sauces, and Gravies</option>
-															<option value='Sausages and Luncheon Meats'>Sausages
-																and Luncheon Meats</option>
-															<option value='Breakfast Cereals'>Breakfast
-																Cereals</option>
-															<option value='Fruits and Fruit Juices'>Fruits
-																and Fruit Juices</option>
-															<option value='Pork Products'>Pork Products</option>
-															<option value='Vegetables and Vegetable Products'>Vegetables
-																and Vegetable Products</option>
-															<option value='Nut and Seed Products'>Nut and
-																Seed Products</option>
-															<option value='Beef Products'>Beef Products</option>
-															<option value='Beverages'>Beverages</option>
-															<option value='Finfish and Shellfish Products'>Finfish
-																and Shellfish Products</option>
-															<option value='Legumes and Legume Products'>Legumes
-																and Legume Products</option>
-															<option value='Lamb, Veal, and Game Products'>Lamb,
-																Veal, and Game Products</option>
-															<option value='Baked Products'>Baked Products</option>
-															<option value='Sweets'>Sweets</option>
-															<option value='Cereal Grains and Pasta'>Cereal
-																Grains and Pasta</option>
-															<option value='Fast Foods'>Fast Foods</option>
-															<option value='Meals, Entrees, and Sidedishes'>Meals,
-																Entrees, and Sidedishes</option>
-															<option value='Snacks'>Snacks</option>
-															<option value='American Indian/Alaska Native Foods'>American
-																Indian/Alaska Native Foods</option>
-															<option value='Restaurant Foods'>Restaurant
-																Foods</option>
-														</select>
+															a group for this food item</label>
+														<div class="col-lg-8">
+															<select class="form-control" name='foodGroup'
+																id="foodGroup" ng-model="foodGroup">
+																<option value='Dairy and Egg Products'>Dairy
+																	and Egg Products</option>
+																<option value='Spices and Herbs'>Spices and
+																	Herbs</option>
+																<option value='Baby Foods'>Baby Foods</option>
+																<option value='Fats and Oils'>Fats and Oils</option>
+																<option value='Poultry Products'>Poultry
+																	Products</option>
+																<option value='Soups, Sauces, and Gravies'>Soups,
+																	Sauces, and Gravies</option>
+																<option value='Sausages and Luncheon Meats'>Sausages
+																	and Luncheon Meats</option>
+																<option value='Breakfast Cereals'>Breakfast
+																	Cereals</option>
+																<option value='Fruits and Fruit Juices'>Fruits
+																	and Fruit Juices</option>
+																<option value='Pork Products'>Pork Products</option>
+																<option value='Vegetables and Vegetable Products'>Vegetables
+																	and Vegetable Products</option>
+																<option value='Nut and Seed Products'>Nut and
+																	Seed Products</option>
+																<option value='Beef Products'>Beef Products</option>
+																<option value='Beverages'>Beverages</option>
+																<option value='Finfish and Shellfish Products'>Finfish
+																	and Shellfish Products</option>
+																<option value='Legumes and Legume Products'>Legumes
+																	and Legume Products</option>
+																<option value='Lamb, Veal, and Game Products'>Lamb,
+																	Veal, and Game Products</option>
+																<option value='Baked Products'>Baked Products</option>
+																<option value='Sweets'>Sweets</option>
+																<option value='Cereal Grains and Pasta'>Cereal
+																	Grains and Pasta</option>
+																<option value='Fast Foods'>Fast Foods</option>
+																<option value='Meals, Entrees, and Sidedishes'>Meals,
+																	Entrees, and Sidedishes</option>
+																<option value='Snacks'>Snacks</option>
+																<option value='American Indian/Alaska Native Foods'>American
+																	Indian/Alaska Native Foods</option>
+																<option value='Restaurant Foods'>Restaurant
+																	Foods</option>
+															</select>
 														</div>
 													</div>
 
@@ -206,6 +208,15 @@
 														</div>
 													</div>
 												</form>
+
+												<div>
+													<ul>
+        												<li ng-repeat="item in foodOptions track by item.ndbno" ng-class="{active:($parent.selected == $index)}" 
+         													 ng-click="$parent.selected = $index; printSelection();">
+           													{{item.name}}
+        												</li>
+    												</ul>
+												</div>
 
 
 

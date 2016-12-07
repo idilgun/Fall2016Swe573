@@ -30,9 +30,23 @@ foodActivityApp.controller('foodConsumptionController', [ '$scope', '$http',
 			};
 
 			$scope.searchFoodByName = function(){
-				
-				console.log($scope.foodName);
-				console.log($scope.foodGroup);
+				$http.get($scope.getUrl() + '/searchFood/' 
+						+ $scope.foodName + "/" + $scope.foodGroup, {}, {
+					'Accept' : 'text/plain;charset=ISO-8859-1',
+					'Content-Type' : 'text/plain'
+				}).success(function(data, status, headers, config) {
+					console.log(data);
+					$scope.foodOptions = data.list.item;
+				}).error(function(data, status, headers, config) {
+					window.alert("We couldn't find any food items for this search");
+				});
+			};
+			
+			console.log($scope.$parent.selected);
+			
+			$scope.printSelection = function(){
+				console.log("The function works");
+				console.log($scope.$parent.selected);
 			};
 
 		} ]);
