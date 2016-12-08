@@ -57,6 +57,9 @@ public class FoodItem {
 	@JsonIgnore
 	transient HashSet<User_FoodItem> userConsumptionsList = new HashSet<User_FoodItem>();
 	
+	@Column(name = "name")
+	private String name;
+	
 	@Column(name = "calorie")
 	private Double calorie;
 	
@@ -501,6 +504,14 @@ public class FoodItem {
 		if(this.zinc!=null){
 			this.zinc = amount * this.zinc;
 		}		
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

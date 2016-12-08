@@ -135,6 +135,8 @@ public class SearchController {
 					foodByUnitId.setItemUnit(unit);
 					FoodItem foodItem = new FoodItem();
 					foodItem.setNdbno_unit(foodByUnitId);
+					
+					foodItem.setName(usdaResponse.getReport().getFood().getName());
 
 					foodByUnits[i] = foodItem;
 				}
