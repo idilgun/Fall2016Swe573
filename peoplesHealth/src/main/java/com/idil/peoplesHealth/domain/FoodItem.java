@@ -60,6 +60,12 @@ public class FoodItem {
 	@Column(name = "name")
 	private String name;
 	
+	@Transient
+	private Double amount;
+	
+	@Transient
+	private String unit;
+	
 	@Column(name = "calorie")
 	private Double calorie;
 	
@@ -449,6 +455,26 @@ public class FoodItem {
 
 	public void setCaffeineUnit(String caffeineUnit) {
 		this.caffeineUnit = caffeineUnit;
+	}
+	
+	
+
+	public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+	
+	
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
 	public void adjustByAmount(Double amount) {

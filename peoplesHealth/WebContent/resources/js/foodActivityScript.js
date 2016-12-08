@@ -43,10 +43,6 @@ foodActivityApp
 										+ $scope.foodConsumption_date_month
 										+ " / "
 										+ $scope.foodConsumption_date_year;
-
-								console.log($scope.foodConsumption_date_day);
-								console.log($scope.foodConsumption_date_month);
-								console.log($scope.foodConsumption_date_year);
 							};
 
 							$scope.getUrl = function() {

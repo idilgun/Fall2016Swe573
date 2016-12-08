@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.idil.peoplesHealth.dao.ActivityDao;
 import com.idil.peoplesHealth.dao.FoodConsumptionDao;
+import com.idil.peoplesHealth.domain.Activity;
+import com.idil.peoplesHealth.domain.ActvityHistoryItem;
+import com.idil.peoplesHealth.domain.FoodActivityHistory;
 import com.idil.peoplesHealth.domain.FoodConsumption;
 import com.idil.peoplesHealth.domain.FoodInfo;
+import com.idil.peoplesHealth.domain.FoodItem;
 import com.idil.peoplesHealth.domain.Message;
 import com.idil.peoplesHealth.domain.User;
 import com.idil.peoplesHealth.util.MailSender;
@@ -26,49 +30,95 @@ public class FoodActivityController {
 
 	@Autowired
 	private FoodConsumptionDao foodConsumptionDao;
-	
+
 	@Autowired
 	private ActivityDao activityDao;
-	
+
 	/**
 	 * This method is used for adding food consumption of a user
-	 * @param foodConsumption holds the data client side application has collected from the user
+	 * 
+	 * @param foodConsumption
+	 *            holds the data client side application has collected from the
+	 *            user
 	 * @return
 	 */
-	@RequestMapping(value = "/addFoodConsumption" , method = RequestMethod.POST, consumes = {"application/json;charset=UTF-8"})
-	public @ResponseBody ResponseEntity<Message> createNewFoodConsumption(@RequestBody FoodConsumption foodConsumption){
+	@RequestMapping(value = "/addFoodConsumption", method = RequestMethod.POST, consumes = {
+			"application/json;charset=UTF-8" })
+	public @ResponseBody ResponseEntity<Message> createNewFoodConsumption(
+			@RequestBody FoodConsumption foodConsumption) {
 
-		try{
+		try {
 			foodConsumptionDao.addFoodConsumption(foodConsumption);
-		}
-		catch(Exception e){
-			ResponseEntity<Message> response = new ResponseEntity<Message>(new Message("Couldn't add food item for user"), HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			ResponseEntity<Message> response = new ResponseEntity<Message>(
+					new Message("Couldn't add food item for user"), HttpStatus.BAD_REQUEST);
 			return response;
 		}
-		
-		ResponseEntity<Message> response = new ResponseEntity<Message>(new Message("Food Item Successfully Added"), HttpStatus.OK);
+
+		ResponseEntity<Message> response = new ResponseEntity<Message>(new Message("Food Item Successfully Added"),
+				HttpStatus.OK);
 		return response;
 	}
-	
+
 	/**
 	 * This method is used for adding activity of a user
-	 * @param  
+	 * 
+	 * @param
 	 * @return
 	 */
-	@RequestMapping(value = "/addActivity" , method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<Message> addActivityForUser(
-			@RequestParam(value = "email") String email, @RequestParam(value = "activityId") String activityId,
-			@RequestParam(value = "date") String date, @RequestParam(value = "hours") String hours){
+	@RequestMapping(value = "/addActivity", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<Message> addActivityForUser(@RequestParam(value = "email") String email,
+			@RequestParam(value = "activityId") String activityId, @RequestParam(value = "date") String date,
+			@RequestParam(value = "hours") String hours) {
 
-		try{
+		try {
 			activityDao.addActivityForUser(activityId, email, date, hours);
-		}
-		catch(Exception e){
-			ResponseEntity<Message> response = new ResponseEntity<Message>(new Message("Couldn't add activity for user"), HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			ResponseEntity<Message> response = new ResponseEntity<Message>(
+					new Message("Couldn't add activity for user"), HttpStatus.BAD_REQUEST);
 			return response;
 		}
-		
-		ResponseEntity<Message> response = new ResponseEntity<Message>(new Message("Activity Successfully Added"), HttpStatus.OK);
+
+		ResponseEntity<Message> response = new ResponseEntity<Message>(new Message("Activity Successfully Added"),
+				HttpStatus.OK);
+		return response;
+	}
+
+	/**
+	 * This method is used for getting food consumption and activity of a user
+	 * 
+	 * @param
+	 * @return
+	 */
+	@RequestMapping(value = "/getFoodActivityHistory", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<FoodActivityHistory> getFoodActivityHistory(
+			@RequestParam(value = "email") String email, @RequestParam(value = "date") String date) {
+
+		FoodActivityHistory history = new FoodActivityHistory();
+
+		ArrayList<FoodItem> foodConsumption = foodConsumptionDao.getFoodConsumptionForUserDate(email, date);
+
+		ArrayList<ActvityHistoryItem> activities = activityDao.getActivityForUserDate(email, date);
+
+		Double calorieConsumed = 0.0;
+
+		Double calorieBurned = 0.0;
+
+		for (int i = 0; i < foodConsumption.size(); i++) {
+			foodConsumption.get(i).adjustByAmount(foodConsumption.get(i).getAmount());
+			calorieConsumed += foodConsumption.get(i).getCalorie();
+		}
+
+		for (int i = 0; i < activities.size(); i++) {
+			calorieBurned += activities.get(i).getCalorieBurn();
+		}
+
+		history.setActivityHistory(activities);
+		history.setFoodConsumptionHistory(foodConsumption);
+		history.setTotalCalorieBurn(calorieBurned);
+		history.setTotalCalorieConsumption(calorieConsumed);
+
+		ResponseEntity<FoodActivityHistory> response = new ResponseEntity<FoodActivityHistory>(history, HttpStatus.OK);
 		return response;
 	}
 }

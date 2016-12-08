@@ -59,209 +59,161 @@
 						<div class="content-page">
 							<div class="filter-v1">
 								<ul class="mix-filter">
-									<li data-filter="all" class="filter active">Calorie
-										Analytics</li>
-									<li data-filter="category_1" class="filter">Nutrient
-										Analytics</li>
-									<li data-filter="category_2" class="filter">BMI Analytics</li>
-								</ul>
-								<div class="row mix-grid thumbnails">
-									<div class="col-md-6 col-sm-6 mix category_1 mix_all"
-										style="display: block; opacity: 1;">
-										<div class="mix-inner">
-											<img alt=""
-												src="${pageContext.request.contextPath}/resources/assets/pages/img/works/img1.jpg"
-												class="img-responsive">
-											<div class="mix-details">
-												<h4>Cascusamus et iusto odio</h4>
-												<p>At vero eos et accusamus et iusto odio digniss imos
-													duc sasdimus qui sint blanditiis prae sentium voluptatum
-													deleniti atque corrupti quos dolores.</p>
-												<a class="mix-link"><i class="fa fa-link"></i></a> <a
-													data-rel="fancybox-button" title="Project Name"
-													href="assets/pages/img/works/img1.jpg"
-													class="mix-preview fancybox-button"><i
-													class="fa fa-search"></i></a>
+									<div class="col-md-10 tab-style-1">
+									<ul ng-init="tab = 1" class="nav nav-tabs">
+										<li class="active"><a data-toggle="tab" href ng-click="tab = 1">Food and Activity History</a></li>
+										<li class=""><a data-toggle="tab" href ng-click="tab = 2">Weight History</a></li>
+									</ul>
+									<div class="tab-content">
+										<div id="tab-1" class="tab-pane active" ng-show="tab===1">
+											<div class="col-md-12">
+												<p>
+													You are viewing food consumption and activity information for <strong>{{todaysDate}}</strong>. You can also select a different date below.
+												</p>
+												<table>
+													<tr>
+														<td>Day <select class="form-control"
+															name='analytics_date_day'
+															id="analytics_date_day"
+															ng-model="analytics_date_day"
+															ng-init="initDatePicker()">
+																<option value='1'>1</option>
+																<option value='2'>2</option>
+																<option value='3'>3</option>
+																<option value='4'>4</option>
+																<option value='5'>5</option>
+																<option value='6'>6</option>
+																<option value='7'>7</option>
+																<option value='8'>8</option>
+																<option value='9'>9</option>
+																<option value='10'>10</option>
+																<option value='11'>11</option>
+																<option value='12'>12</option>
+																<option value='13'>13</option>
+																<option value='14'>14</option>
+																<option value='15'>15</option>
+																<option value='16'>16</option>
+																<option value='17'>17</option>
+																<option value='18'>18</option>
+																<option value='19'>19</option>
+																<option value='20'>20</option>
+																<option value='21'>21</option>
+																<option value='22'>22</option>
+																<option value='23'>23</option>
+																<option value='24'>24</option>
+																<option value='25'>25</option>
+																<option value='26'>26</option>
+																<option value='27'>27</option>
+																<option value='28'>28</option>
+																<option value='29'>29</option>
+																<option value='30'>30</option>
+																<option value='31'>31</option>
+														</select></td>
+														<td>Month <select class="form-control" name='month'
+															id="analytics_date_month"
+															ng-model="analytics_date_month">
+																<option value='1'>1</option>
+																<option value='2'>2</option>
+																<option value='3'>3</option>
+																<option value='4'>4</option>
+																<option value='5'>5</option>
+																<option value='6'>6</option>
+																<option value='7'>7</option>
+																<option value='8'>8</option>
+																<option value='9'>9</option>
+																<option value='10'>10</option>
+																<option value='11'>11</option>
+																<option value='12'>12</option>
+														</select></td>
+														<td>Year <select class="form-control" name='day'
+															id="analytics_date_year"
+															ng-model="analytics_date_year">
+																<option value='2016'>2016</option>
+																<option value='2017'>2017</option>
+														</select></td>
+														<td><div
+															class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
+															<button type="submit" class="btn btn-primary"
+																ng-click="getFoodAndActivityForDate()">Change Date</button>
+														</div></td>
+													</tr>
+												</table>
+												
+												<div>
+														<table class="table table-hover">
+														<thead>
+																<tr>
+																	<th>Food Name</th>
+																	<th>Amount</th>
+																	<th>Unit</th>
+																	<th>Energy Consumed</th>
+																	<th><p></p></th>
+																</tr>
+														</thead>
+														<tbody>
+																<tr
+																	ng-repeat="item in foodHistory track by $index" ng-click="selectItem($index)" >
+																	<td ng-model="selectedFoodEntry">
+																				{{item.name}}</td>
+																	<td>{{item.amount}}</td>
+																	<td>{{item.unit}}</td>
+																	<td>{{item.calorie}}</td>
+																	<td>kcal</td>
+																</tr>
+																<tr class="warning">
+																	<td> TOTAL CONSUMED: </td>
+																	<td><p></p></td>
+																	<td><p></p></td>
+																	<td>{{totalCalorieConsumed}}</td>
+																	<td>kcal</td>
+																</tr>
+															</tbody>
+														</table>
+														
+														<table class="table">
+														<thead>
+																<tr>
+																	<th>Activity Name</th>
+																	<th>Hours</th>
+																	<th>Energy Burned</th>
+																	<th><p></p></th>
+																</tr>
+														</thead>
+														<tbody>
+																<tr
+																	ng-repeat="activityItem in activityHistory track by $index" >
+																	<td>
+																				{{activityItem.activityName}}</td>
+																	<td>{{activityItem.hours}}</td>
+																	<td>{{activityItem.calorieBurn}}</td>
+																	<td>kcal</td>
+																</tr>
+																<tr class="success">
+																	<td> TOTAL BURNED: </td>
+																	<td><p></p></td>
+																	<td>{{totalCalorieBurned}}</td>
+																	<td>kcal</td>
+																</tr>
+															</tbody>
+														</table>
+														
+		
+													</div>
+												
 											</div>
 										</div>
-									</div>
-									<div class="col-md-6 col-sm-6 mix category_2 mix_all"
-										style="display: block; opacity: 1;">
-										<div class="mix-inner">
-											<img alt=""
-												src="${pageContext.request.contextPath}/resources/assets/pages/img/works/img2.jpg"
-												class="img-responsive">
-											<div class="mix-details">
-												<h4>Cascusamus et iusto odio</h4>
-												<p>At vero eos et accusamus et iusto odio digniss imos
-													duc sasdimus qui sint blanditiis prae sentium voluptatum
-													deleniti atque corrupti quos dolores.</p>
-												<a class="mix-link"><i class="fa fa-link"></i></a> <a
-													data-rel="fancybox-button" title="Project Name"
-													href="assets/pages/img/works/img2.jpg"
-													class="mix-preview fancybox-button"><i
-													class="fa fa-search"></i></a>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-6 col-sm-6 mix category_3 mix_all"
-										style="display: block; opacity: 1;">
-										<div class="mix-inner">
-											<img alt=""
-												src="${pageContext.request.contextPath}/resources/assets/pages/img/works/img3.jpg"
-												class="img-responsive">
-											<div class="mix-details">
-												<h4>Cascusamus et iusto odio</h4>
-												<p>At vero eos et accusamus et iusto odio digniss imos
-													duc sasdimus qui sint blanditiis prae sentium voluptatum
-													deleniti atque corrupti quos dolores.</p>
-												<a class="mix-link"><i class="fa fa-link"></i></a> <a
-													data-rel="fancybox-button" title="Project Name"
-													href="assets/pages/img/works/img3.jpg"
-													class="mix-preview fancybox-button"><i
-													class="fa fa-search"></i></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="col-md-6 col-sm-6 mix category_1 category_2 mix_all"
-										style="display: block; opacity: 1;">
-										<div class="mix-inner">
-											<img alt=""
-												src="${pageContext.request.contextPath}/resources/assets/pages/img/works/img4.jpg"
-												class="img-responsive">
-											<div class="mix-details">
-												<h4>Cascusamus et iusto odio</h4>
-												<p>At vero eos et accusamus et iusto odio digniss imos
-													duc sasdimus qui sint blanditiis prae sentium voluptatum
-													deleniti atque corrupti quos dolores.</p>
-												<a class="mix-link"><i class="fa fa-link"></i></a> <a
-													data-rel="fancybox-button" title="Project Name"
-													href="assets/pages/img/works/img4.jpg"
-													class="mix-preview fancybox-button"><i
-													class="fa fa-search"></i></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="col-md-6 col-sm-6 mix category_2 category_1 mix_all"
-										style="display: block; opacity: 1;">
-										<div class="mix-inner">
-											<img alt=""
-												src="${pageContext.request.contextPath}/resources/assets/pages/img/works/img5.jpg"
-												class="img-responsive">
-											<div class="mix-details">
-												<h4>Cascusamus et iusto odio</h4>
-												<p>At vero eos et accusamus et iusto odio digniss imos
-													duc sasdimus qui sint blanditiis prae sentium voluptatum
-													deleniti atque corrupti quos dolores.</p>
-												<a class="mix-link"><i class="fa fa-link"></i></a> <a
-													data-rel="fancybox-button" title="Project Name"
-													href="assets/pages/img/works/img5.jpg"
-													class="mix-preview fancybox-button"><i
-													class="fa fa-search"></i></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="col-md-6 col-sm-6 mix category_1 category_2 mix_all"
-										style="display: block; opacity: 1;">
-										<div class="mix-inner">
-											<img alt=""
-												src="${pageContext.request.contextPath}/resources/assets/pages/img/works/img6.jpg"
-												class="img-responsive">
-											<div class="mix-details">
-												<h4>Cascusamus et iusto odio</h4>
-												<p>At vero eos et accusamus et iusto odio digniss imos
-													duc sasdimus qui sint blanditiis prae sentium voluptatum
-													deleniti atque corrupti quos dolores.</p>
-												<a class="mix-link"><i class="fa fa-link"></i></a> <a
-													data-rel="fancybox-button" title="Project Name"
-													href="assets/pages/img/works/img6.jpg"
-													class="mix-preview fancybox-button"><i
-													class="fa fa-search"></i></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="col-md-6 col-sm-6 mix category_2 category_3 mix_all"
-										style="display: block; opacity: 1;">
-										<div class="mix-inner">
-											<img alt=""
-												src="${pageContext.request.contextPath}/resources/assets/pages/img/works/img1.jpg"
-												class="img-responsive">
-											<div class="mix-details">
-												<h4>Cascusamus et iusto odio</h4>
-												<p>At vero eos et accusamus et iusto odio digniss imos
-													duc sasdimus qui sint blanditiis prae sentium voluptatum
-													deleniti atque corrupti quos dolores.</p>
-												<a class="mix-link"><i class="fa fa-link"></i></a> <a
-													data-rel="fancybox-button" title="Project Name"
-													href="assets/pages/img/works/img1.jpg"
-													class="mix-preview fancybox-button"><i
-													class="fa fa-search"></i></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="col-md-6 col-sm-6 mix category_1 category_2 mix_all"
-										style="display: block; opacity: 1;">
-										<div class="mix-inner">
-											<img alt=""
-												src="${pageContext.request.contextPath}/resources/assets/pages/img/works/img2.jpg"
-												class="img-responsive">
-											<div class="mix-details">
-												<h4>Cascusamus et iusto odio</h4>
-												<p>At vero eos et accusamus et iusto odio digniss imos
-													duc sasdimus qui sint blanditiis prae sentium voluptatum
-													deleniti atque corrupti quos dolores.</p>
-												<a class="mix-link"><i class="fa fa-link"></i></a> <a
-													data-rel="fancybox-button" title="Project Name"
-													href="assets/pages/img/works/img2.jpg"
-													class="mix-preview fancybox-button"><i
-													class="fa fa-search"></i></a>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-6 col-sm-6 mix category_3 mix_all"
-										style="display: block; opacity: 1;">
-										<div class="mix-inner">
-											<img alt=""
-												src="${pageContext.request.contextPath}/resources/assets/pages/img/works/img4.jpg"
-												class="img-responsive">
-											<div class="mix-details">
-												<h4>Cascusamus et iusto odio</h4>
-												<p>At vero eos et accusamus et iusto odio digniss imos
-													duc sasdimus qui sint blanditiis prae sentium voluptatum
-													deleniti atque corrupti quos dolores.</p>
-												<a class="mix-link"><i class="fa fa-link"></i></a> <a
-													data-rel="fancybox-button" title="Project Name"
-													href="assets/pages/img/works/img4.jpg"
-													class="mix-preview fancybox-button"><i
-													class="fa fa-search"></i></a>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-6 col-sm-6 mix category_1 mix_all"
-										style="display: block; opacity: 1;">
-										<div class="mix-inner">
-											<img alt=""
-												src="${pageContext.request.contextPath}/resources/assets/pages/img/works/img3.jpg"
-												class="img-responsive">
-											<div class="mix-details">
-												<h4>Cascusamus et iusto odio</h4>
-												<p>At vero eos et accusamus et iusto odio digniss imos
-													duc sasdimus qui sint blanditiis prae sentium voluptatum
-													deleniti atque corrupti quos dolores.</p>
-												<a class="mix-link"><i class="fa fa-link"></i></a> <a
-													data-rel="fancybox-button" title="Project Name"
-													href="assets/pages/img/works/img3.jpg"
-													class="mix-preview fancybox-button"><i
-													class="fa fa-search"></i></a>
+										<div id="tab-2" class="tab-pane active" ng-show="tab===2">
+											<div class="col-md-12">
+												<p>
+													Weight History
+												</p>
+												
 											</div>
 										</div>
 									</div>
 								</div>
+								</ul>
+								
 							</div>
 						</div>
 					</div>

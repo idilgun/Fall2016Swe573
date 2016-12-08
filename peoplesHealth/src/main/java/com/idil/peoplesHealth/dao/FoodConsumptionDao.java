@@ -1,14 +1,18 @@
 package com.idil.peoplesHealth.dao;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.idil.peoplesHealth.domain.Activity;
 import com.idil.peoplesHealth.domain.FoodConsumption;
 import com.idil.peoplesHealth.domain.FoodItem;
 import com.idil.peoplesHealth.domain.FoodItem.ndbno_itemUnit;
@@ -88,6 +92,27 @@ public class FoodConsumptionDao {
 		consumption.setUserConsumptionKey(consumptionKey);
 		
 		sessionFactory.getCurrentSession().save(consumption);
+	}
+
+	@Transactional
+	public ArrayList<FoodItem> getFoodConsumptionForUserDate(String email, String date) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User_FoodItem.class,
+				"userFoodConsumption");
+		criteria.add(Restrictions.eq("userFoodConsumption.userConsumptionKey.user.email", email));
+		criteria.add(Restrictions.eq("userFoodConsumption.userConsumptionKey.dateTime", date));
+
+		List<User_FoodItem> userConsumptionList = criteria.list();
+
+		 ArrayList<FoodItem> foodList = new  ArrayList<FoodItem>();
+		 
+		 for(int i=0; i<userConsumptionList.size(); i++){
+			 FoodItem foodItem = userConsumptionList.get(i).getUserConsumptionKey().getFoodItem();
+			 foodItem.setAmount(userConsumptionList.get(i).getUserConsumptionKey().getItemAmount());
+			 foodItem.setUnit(userConsumptionList.get(i).getUserConsumptionKey().getFoodItem().getNdbno_unit().getItemUnit());
+			 foodList.add(foodItem);
+		 }
+		 	
+		return foodList;
 	}
 	
 	
