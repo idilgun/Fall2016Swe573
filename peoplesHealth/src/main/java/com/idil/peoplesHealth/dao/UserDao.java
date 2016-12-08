@@ -1,14 +1,18 @@
 package com.idil.peoplesHealth.dao;
 
 import java.util.Date;
+import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.idil.peoplesHealth.domain.User;
 import com.idil.peoplesHealth.domain.UserHistory;
+import com.idil.peoplesHealth.domain.User_FoodItem;
 import com.idil.peoplesHealth.domain.UserHistory.email_dateTimeId;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
@@ -66,5 +70,17 @@ public class UserDao {
 		}
 		return true;
 		
+	}
+
+	@Transactional
+	public List<UserHistory> getUserWeightHistory(String email) {
+		
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(UserHistory.class,
+				"userHistory");
+		criteria.add(Restrictions.eq("userHistory.id.email", email));
+
+		List<UserHistory> userHistoryList = criteria.list();
+		
+		return userHistoryList;
 	}
 }

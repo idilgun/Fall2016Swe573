@@ -1,5 +1,7 @@
 package com.idil.peoplesHealth.controller;
 
+import java.util.List;
+
 import javax.mail.MessagingException;
 
 import org.apache.http.HttpResponse;
@@ -20,6 +22,7 @@ import com.idil.peoplesHealth.dao.UserDao;
 import com.idil.peoplesHealth.dao.UserDao;
 import com.idil.peoplesHealth.domain.Message;
 import com.idil.peoplesHealth.domain.User;
+import com.idil.peoplesHealth.domain.UserHistory;
 import com.idil.peoplesHealth.util.MailSender;
 import com.idil.peoplesHeath.USDA.response.SearchByNameResponse;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
@@ -132,6 +135,20 @@ public class UserController {
 			ResponseEntity<User> response = new ResponseEntity<User>(new User(), HttpStatus.UNAUTHORIZED);
 			return response;
 		}
+		
+	}
+	
+	/**
+	 * This method is used for getting user weight history
+	 * @param email is user's unique identifier
+	 * @return
+	 */
+	@RequestMapping(value = "/getUserWeightHistory" , method = RequestMethod.GET)
+	public ResponseEntity<List<UserHistory>> getUserWeightHistory(@RequestParam String email){
+		List<UserHistory> userWeightHistory = userDao.getUserWeightHistory(email);
+		
+		ResponseEntity<List<UserHistory>> response = new ResponseEntity<List<UserHistory>>(userWeightHistory, HttpStatus.OK);
+		return response;
 		
 	}
 	
