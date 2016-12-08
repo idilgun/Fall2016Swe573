@@ -85,7 +85,7 @@ loginApp.controller('registerController', [
 					UserService.setUser(user);
 					$location.path('/bmi');
 				}).error(function(data, status, header, config) {
-					window.alert("please try again");
+					window.alert(data);
 				});
 			};
 
@@ -121,7 +121,7 @@ loginApp.controller('loginController', [ '$scope', '$http', '$window',
 					UserService.setUser(data);
 					$location.path('/bmi');
 				}).error(function(data, status, headers, config) {
-					window.alert("The password you entered is incorrect");
+					window.alert("The password or the email you entered is incorrect");
 				});
 			};
 		} ]);

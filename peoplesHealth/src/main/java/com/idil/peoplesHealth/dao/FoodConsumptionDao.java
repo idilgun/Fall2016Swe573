@@ -80,7 +80,7 @@ public class FoodConsumptionDao {
 		
 		consumptionKey.setFoodItem(foodItem);
 		
-		consumptionKey.setItemAmount(foodConsumption.getAmount());
+		consumptionKey.setItemAmount(Double.valueOf(foodConsumption.getAmount().replace(",", ".")));
 		
 		consumptionKey.setDateTime(foodConsumption.getDate());
 		

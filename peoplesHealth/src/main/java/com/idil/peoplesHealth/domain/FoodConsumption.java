@@ -14,7 +14,7 @@ public class FoodConsumption {
 	private String itemUnit;
 	
 	@JsonProperty("amount")
-	private Double amount;
+	private String amount;
 	
 	@JsonProperty("date")
 	private String date;
@@ -43,11 +43,11 @@ public class FoodConsumption {
 		this.itemUnit = itemUnit;
 	}
 
-	public Double getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Double amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 

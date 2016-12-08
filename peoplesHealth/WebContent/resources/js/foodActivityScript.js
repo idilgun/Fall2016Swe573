@@ -123,6 +123,38 @@ foodActivityApp
 								console.log($scope.foodAmount);
 								console.log($scope.selectedNdbno);
 								console.log($rootScope.email);
+								
+								if ($scope.foodConsumption_date_day < 10) {
+									$scope.foodConsumption_date_day = "0"
+											+ $scope.foodConsumption_date_day;
+								}
+
+								if ($scope.foodConsumption_date_month < 10) {
+									$scope.foodConsumption_date_month = "0"
+											+ $scope.foodConsumption_date_month;
+								}
+
+								var foodConsumption = {
+
+									email : $rootScope.email,
+									ndbno : $scope.selectedNdbno,
+									itemUnit : $scope.selectedUnit,
+									amount : $scope.foodAmount,
+									date : $scope.foodConsumption_date_year
+											+ $scope.foodConsumption_date_month
+											+ $scope.foodConsumption_date_day
+									
+								};
+								
+								$http.post($scope.getUrl() + '/addFoodConsumption', foodConsumption, {
+									'Content-Type' : 'application/json'
+								}).success(function(data, status, headers, config) {
+									$location.path('/analytics');
+								}).error(function(data, status, header, config) {
+									window.alert(data.message);
+								});
+								
+								
 							};
 
 							$scope.getDetailsOfItem = function() {
