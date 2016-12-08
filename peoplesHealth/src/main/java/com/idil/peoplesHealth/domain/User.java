@@ -50,6 +50,9 @@ public class User {
 	
 	@JsonIgnore
 	private Set<User_FoodItem> foodConsumptionList = new HashSet<User_FoodItem>();
+	
+	@JsonIgnore
+	private Set<User_Activity> activityList = new HashSet<User_Activity>();
 
 	@Id
 	@Column(name = "email")
@@ -131,6 +134,15 @@ public class User {
 
 	public void setFoodConsumptionList(Set<User_FoodItem> foodConsumptionList) {
 		this.foodConsumptionList = foodConsumptionList;
+	}
+
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "userActivityKey.user")
+	public Set<User_Activity> getActivityList() {
+		return activityList;
+	}
+
+	public void setActivityList(Set<User_Activity> activityList) {
+		this.activityList = activityList;
 	}
 	
 	

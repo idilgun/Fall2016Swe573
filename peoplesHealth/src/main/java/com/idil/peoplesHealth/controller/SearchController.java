@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.idil.peoplesHealth.dao.ActivityDao;
 import com.idil.peoplesHealth.dao.FoodConsumptionDao;
 import com.idil.peoplesHealth.dao.UserDao;
+import com.idil.peoplesHealth.domain.Activity;
 import com.idil.peoplesHealth.domain.FoodInfo;
 import com.idil.peoplesHealth.domain.FoodItem;
 import com.idil.peoplesHealth.domain.FoodItem.ndbno_itemUnit;
@@ -36,6 +38,9 @@ public class SearchController {
 
 	@Autowired
 	private FoodConsumptionDao foodConsumptionDao;
+	
+	@Autowired
+	private ActivityDao activityDao;
 
 	/**
 	 * This method is used for searching food by name and group
@@ -386,6 +391,24 @@ public class SearchController {
 		ResponseEntity<ArrayList<FoodInfo>> response = new ResponseEntity<ArrayList<FoodInfo>>(foodInfos,
 				HttpStatus.OK);
 		return response;
+	}
+	
+	/**
+	 * This method is used for searching activity by activity type
+	 * 
+	 * @param activityType
+	 *            is what the user inputs to search for an activity
+	 * @return
+	 */
+	@RequestMapping(value = "/searchActivity", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<ArrayList<Activity>> activitiesWithName(
+			@RequestParam(value = "activityName") String activityName ) {
+		
+		ArrayList<Activity> activities = activityDao.getActivitiesWithNameLike(activityName);
+		
+		return new ResponseEntity<ArrayList<Activity>>(activities,
+					HttpStatus.OK);
+		
 	}
 
 }
