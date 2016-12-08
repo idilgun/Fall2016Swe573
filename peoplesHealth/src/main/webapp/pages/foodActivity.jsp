@@ -341,6 +341,44 @@
 														</select></td>
 													</tr>
 												</table>
+												<form class="form-horizontal form-without-legend"
+													role="form">
+													<div class="form-group">
+														<label for="foodName" class="col-lg-4 control-label">Enter
+															name of activity</label>
+														<div class="col-lg-8">
+															<input type="text" class="form-control" id="foodName"
+																ng-model="activityName" ng-change="searchActivity()">
+														</div>
+													</div>
+												</form>
+												
+												<div
+													class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-5">
+													<div ng-show="showActivityItems" class="list-group">
+														<button class="list-group-item"
+															ng-repeat="item in activityItems track by item.activityId"
+															ng-model="selectedActivityItem" ng-click="selectActivityItem(item)">
+															{{item.activityName}}</button>
+													</div>
+													<div ng-show="showSelectedActivityItem" class="list-group">
+														<button disabled class="list-group-item"
+															ng-model="selectedActivityItem">{{selectedActivityItemName}}</button>
+													</div>
+													<div ng-show="showSelectedItemHours"
+														class="col-lg-8 padding-left-0 padding-top-5">
+
+														<table style="border-spacing: 10px;">
+															<tr>
+																<td width="60px"><input type="text" class="form-control"
+																	id="hours" ng-model="activityHours"></td>
+																<td>Hours<span style="display:inline-block; width:50px;"></span></td>
+																<td>
+																	<button type="submit" class="btn btn-primary"
+																		ng-click="addActivity()">Add</button></td>
+															</tr>
+														</table>
+													</div>
 											</div>
 										</div>
 									</div>

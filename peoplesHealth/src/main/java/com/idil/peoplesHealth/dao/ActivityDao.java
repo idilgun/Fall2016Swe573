@@ -30,7 +30,7 @@ public class ActivityDao {
 
 		Criteria activityCriteria = sessionFactory.getCurrentSession().createCriteria(Activity.class,
 				"activity");
-		activityCriteria.add(Restrictions.like("activity.activityName", activityName+"%s"));
+		activityCriteria.add(Restrictions.like("activity.activityName", activityName+"%"));
 
 		List<Activity> activities = activityCriteria.list();
 		if (activities == null || activities.size() == 0) {

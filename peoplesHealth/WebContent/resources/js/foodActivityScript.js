@@ -19,6 +19,11 @@ foodActivityApp
 							$scope.foodAmount = "";
 							$scope.selectedNdbno = "";
 							
+							$scope.activityName = "";
+							$scope.selectedActivityItem = {};
+							$scope.selectedActivityItemName = "";
+							$scope.activityHours = "";
+							
 							$scope.logOut = function() {
 								$rootScope.loggedIn = false;
 							};
@@ -186,6 +191,91 @@ foodActivityApp
 													window
 															.alert("Something went wrong, please try again.");
 												});
+							};
+							
+							
+							
+							$scope.searchActivity = function(){
+								$scope.showSelectedItemHours = false;
+								$scope.showSelectedActivityItem = false;
+								$http
+								.get(
+										$scope.getUrl()
+												+ '/searchActivity',
+										{
+											params : {
+												activityName : $scope.activityName,
+											}
+										},
+										{
+											'Accept' : 'text/plain;charset=ISO-8859-1',
+											'Content-Type' : 'text/plain'
+										})
+								.success(
+										function(data, status, headers,
+												config) {
+											$scope.showActivityItems = true;
+											$scope.activityItems = data;
+											console.log(data);
+										})
+								.error(
+										function(data, status, headers,
+												config) {
+											window
+													.alert("oops, something went wrong, please enter activity name again");
+										});
+							};
+							
+							$scope.selectActivityItem = function(item){
+								$scope.showActivityItems = false;
+								$scope.showSelectedActivityItem = true;
+								$scope.selectedActivityItem = item;
+								$scope.selectedActivityItemName = item.activityName;
+								$scope.showSelectedItemHours = true;
+								
+							};
+							
+							$scope.addActivity = function(){
+								
+								if ($scope.foodConsumption_date_day < 10) {
+									$scope.foodConsumption_date_day = "0"
+											+ $scope.foodConsumption_date_day;
+								}
+
+								if ($scope.foodConsumption_date_month < 10) {
+									$scope.foodConsumption_date_month = "0"
+											+ $scope.foodConsumption_date_month;
+								}
+								
+								$http
+								.get(
+										$scope.getUrl()
+												+ '/addActivity',
+										{
+											params : {
+												email : $rootScope.email,
+												activityId : $scope.selectedActivityItem.activityId,
+												date : $scope.foodConsumption_date_year
+												+ $scope.foodConsumption_date_month
+												+ $scope.foodConsumption_date_day,
+												hours : $scope.activityHours
+											}
+										},
+										{
+											'Accept' : 'text/plain;charset=ISO-8859-1',
+											'Content-Type' : 'text/plain'
+										})
+								.success(
+										function(data, status, headers,
+												config) {
+											$location.path('/analytics');
+										})
+								.error(
+										function(data, status, headers,
+												config) {
+											window
+													.alert("oops, something went wrong, please add activity again");
+										});
 							};
 
 						} ]);
