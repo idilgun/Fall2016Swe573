@@ -17,6 +17,8 @@
 	src="${pageContext.request.contextPath}/resources/js/registerScript.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/foodActivityScript.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/analyticsScript.js"></script>
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/angular-datepicker.js"></script>

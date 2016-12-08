@@ -1,5 +1,5 @@
 <div ng-app="mainApp">
-	<div>
+	<div ng-controller="analyticsController">
 		<div class="pre-header">
 			<div class="container">
 				<div class="row">
@@ -13,8 +13,7 @@
 					<!-- BEGIN TOP BAR MENU -->
 					<div class="col-md-6 col-sm-6 additional-nav">
 						<ul class="list-unstyled list-inline pull-right">
-							<li><a href="#/loginPage">Log In</a></li>
-							<li><a href="#/signUpPage">Sign Up</a></li>
+							<li><a href="#/loginPage" ng-click="logOut()">Log Out</a></li>
 						</ul>
 					</div>
 					<!-- END TOP BAR MENU -->
