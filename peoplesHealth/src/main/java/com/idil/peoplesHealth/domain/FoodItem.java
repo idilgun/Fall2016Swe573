@@ -1,12 +1,24 @@
 package com.idil.peoplesHealth.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "poeplesHealth.ITEM")
@@ -41,6 +53,9 @@ public class FoodItem {
 	
 	@EmbeddedId
 	ndbno_itemUnit ndbno_unit;
+	
+	@JsonIgnore
+	transient HashSet<User_FoodItem> userConsumptionsList = new HashSet<User_FoodItem>();
 	
 	@Column(name = "calorie")
 	private Double calorie;
@@ -150,6 +165,15 @@ public class FoodItem {
 
 	public void setNdbno_unit(ndbno_itemUnit ndbno_unit) {
 		this.ndbno_unit = ndbno_unit;
+	}
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "userConsumptionKey.foodItem")
+	public HashSet<User_FoodItem> getUserConsumptionsList() {
+		return userConsumptionsList;
+	}
+
+	public void setUserConsumptionsList(HashSet<User_FoodItem> userConsumptionsList) {
+		this.userConsumptionsList = userConsumptionsList;
 	}
 
 	public Double getCalorie() {

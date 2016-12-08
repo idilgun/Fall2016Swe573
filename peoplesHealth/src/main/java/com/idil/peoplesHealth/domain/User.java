@@ -1,10 +1,20 @@
 package com.idil.peoplesHealth.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -37,6 +47,9 @@ public class User {
 	
 	@JsonProperty("name")
 	private String name;
+	
+	@JsonIgnore
+	private Set<User_FoodItem> foodConsumptionList = new HashSet<User_FoodItem>();
 
 	@Id
 	@Column(name = "email")
@@ -109,6 +122,15 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "userConsumptionKey.user")
+	public Set<User_FoodItem> getFoodConsumptionList() {
+		return foodConsumptionList;
+	}
+
+	public void setFoodConsumptionList(Set<User_FoodItem> foodConsumptionList) {
+		this.foodConsumptionList = foodConsumptionList;
 	}
 	
 	

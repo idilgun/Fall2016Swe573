@@ -11,5 +11,6 @@
     <mapping class="com.idil.peoplesHealth.domain.User"/>
     <mapping class="com.idil.peoplesHealth.domain.UserHistory"/>
     <mapping class="com.idil.peoplesHealth.domain.FoodItem"/>
+    <mapping class="com.idil.peoplesHealth.domain.User_FoodItem"/>
   </session-factory>
 </hibernate-configuration>
