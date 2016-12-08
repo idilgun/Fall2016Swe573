@@ -48,8 +48,8 @@ public class UserController {
 			ResponseEntity<String> response = new ResponseEntity<String>("User Already Exists", HttpStatus.BAD_REQUEST);
 			return response;
 		}
-		
-		
+		MailSender ms = new MailSender();
+		ms.sendHelloMailTo(userDetail,javaMailSender);
 		ResponseEntity<String> response = new ResponseEntity<String>("User Successfully Added", HttpStatus.OK);
 		return response;
 	}
