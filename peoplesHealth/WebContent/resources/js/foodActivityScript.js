@@ -76,7 +76,7 @@ foodActivityApp
 												function(data, status, headers,
 														config) {
 													console.log(data);
-													if(data.length>0){
+													if(data.list.item.length>0){
 														$scope.foodOptions = data.list.item;
 													}
 													else{

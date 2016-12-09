@@ -11,6 +11,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 	<context:component-scan base-package="com.idil.peoplesHealth.controller" />
 	<context:component-scan base-package="com.idil.peoplesHealth.dao" />
 	<context:component-scan base-package="com.idil.peoplesHealth.util" />
+	<context:component-scan base-package="com.idil.peoplesHealth.controller.test" />
  	<mvc:annotation-driven/>
  	<tx:annotation-driven />
 	
