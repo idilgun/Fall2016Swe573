@@ -22,6 +22,9 @@
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/angular-datepicker.js"></script>
+	
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 <title>People's Health</title>
 
