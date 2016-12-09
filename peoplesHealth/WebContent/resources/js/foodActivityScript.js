@@ -76,7 +76,13 @@ foodActivityApp
 												function(data, status, headers,
 														config) {
 													console.log(data);
-													$scope.foodOptions = data.list.item;
+													if(data.length>0){
+														$scope.foodOptions = data.list.item;
+													}
+													else{
+														$scope.foodOptions = [{name: "No Results!"}];
+													}
+													
 												})
 										.error(
 												function(data, status, headers,
