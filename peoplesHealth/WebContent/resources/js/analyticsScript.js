@@ -26,6 +26,16 @@ foodActivityApp
 								$scope.todaysDate = $scope.analytics_date_day
 										+ " / " + $scope.analytics_date_month
 										+ " / " + $scope.analytics_date_year;
+								
+								if ($scope.analytics_date_day < 10) {
+									$scope.analytics_date_day = "0"
+											+ $scope.analytics_date_day;
+								}
+
+								if ($scope.analytics_date_month < 10) {
+									$scope.analytics_date_month = "0"
+											+ $scope.analytics_date_month;
+								}
 
 								$scope.getFoodAndActivityForDate();
 
@@ -45,16 +55,6 @@ foodActivityApp
 							};
 
 							$scope.getFoodAndActivityForDate = function() {
-
-								if ($scope.analytics_date_day < 10) {
-									$scope.analytics_date_day = "0"
-											+ $scope.analytics_date_day;
-								}
-
-								if ($scope.analytics_date_month < 10) {
-									$scope.analytics_date_month = "0"
-											+ $scope.analytics_date_month;
-								}
 
 								$http
 										.get(

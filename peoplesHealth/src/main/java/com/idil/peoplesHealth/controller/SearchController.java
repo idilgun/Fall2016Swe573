@@ -70,7 +70,13 @@ public class SearchController {
 
 			SearchByNameResponse usdaResponse = gson.fromJson(jsonResponse, SearchByNameResponse.class);
 
+			SearchByNameResponse unfilteredResponse = gson.fromJson(jsonResponse, SearchByNameResponse.class);
+			
 			USDAResponseUtil.filterFoodsByGroup(usdaResponse, group);
+			
+			if(usdaResponse.getList().getItems().isEmpty()){
+				usdaResponse = unfilteredResponse;
+			}
 
 			ResponseEntity<SearchByNameResponse> response = new ResponseEntity<SearchByNameResponse>(usdaResponse,
 					HttpStatus.OK);
@@ -385,7 +391,9 @@ public class SearchController {
 				break;
 			}
 
-			foodInfos.add(foodInfo);
+			if(foodInfo.getName()!=null && foodInfo.getUnit()!=null && foodInfo.getValue()!=null){
+				foodInfos.add(foodInfo);
+			}	
 		}
 
 		ResponseEntity<ArrayList<FoodInfo>> response = new ResponseEntity<ArrayList<FoodInfo>>(foodInfos,
