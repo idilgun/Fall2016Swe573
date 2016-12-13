@@ -1,6 +1,9 @@
 package com.idil.peoplesHealth.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.idil.peoplesHealth.domain.Activity;
+import com.idil.peoplesHealth.domain.CalorieHistory;
 import com.idil.peoplesHealth.domain.FoodConsumption;
 import com.idil.peoplesHealth.domain.FoodItem;
 import com.idil.peoplesHealth.domain.FoodItem.ndbno_itemUnit;
@@ -113,6 +117,37 @@ public class FoodConsumptionDao {
 		 }
 		 	
 		return foodList;
+	}
+
+	@Transactional
+	public ArrayList<CalorieHistory> getFoodConsumptionForUserDate(String email) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User_FoodItem.class,
+				"userFoodConsumption");
+		criteria.add(Restrictions.eq("userFoodConsumption.userConsumptionKey.user.email", email));		
+		
+		List<User_FoodItem> userConsumptionList = criteria.list();
+
+		 ArrayList<CalorieHistory> calorieConsumptionHistory = new  ArrayList<CalorieHistory>();
+		 SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		 
+		 for(int i=0; i<userConsumptionList.size(); i++){
+			 Date dateTime;
+			try {
+				dateTime = formatter.parse(userConsumptionList.get(i).getUserConsumptionKey().getDateTime());
+//				CalorieHistory ch = new CalorieHistory();
+//				 ch.setDateTime(dateTime);
+//				 FoodItem foodItem = userConsumptionList.get(i).getUserConsumptionKey().getFoodItem();
+//				 foodItem.setAmount(userConsumptionList.get(i).getUserConsumptionKey().getItemAmount());
+//				 foodItem.setUnit(userConsumptionList.get(i).getUserConsumptionKey().getFoodItem().getNdbno_unit().getItemUnit());
+//				 foodItem.adjustByAmount(foodItem.getAmount());
+//				 ch.setCalorieValue(foodItem.getCalorie());
+//				 calorieConsumptionHistory.add(ch);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			} 
+		 }
+		return calorieConsumptionHistory;
+		
 	}
 	
 	

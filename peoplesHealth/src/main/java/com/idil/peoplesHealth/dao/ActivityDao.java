@@ -1,6 +1,9 @@
 package com.idil.peoplesHealth.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -12,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.idil.peoplesHealth.domain.Activity;
 import com.idil.peoplesHealth.domain.ActvityHistoryItem;
+import com.idil.peoplesHealth.domain.CalorieHistory;
 import com.idil.peoplesHealth.domain.FoodItem;
 import com.idil.peoplesHealth.domain.User;
 import com.idil.peoplesHealth.domain.User_Activity;
@@ -106,5 +110,52 @@ public class ActivityDao {
 		}
 
 		return activities;
+	}
+
+	@Transactional
+	public ArrayList<CalorieHistory> getActivityForUserDate(String email) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User_Activity.class, "userActivity");
+		criteria.add(Restrictions.eq("userActivity.userActivityKey.user.email", email));
+
+		List<User_Activity> userActivityList = criteria.list();
+
+		ArrayList<CalorieHistory> calorieBurnHistory = new ArrayList<CalorieHistory>();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+
+		for (int i = 0; i < userActivityList.size(); i++) {
+			try {
+				Date dateTime = formatter.parse(userActivityList.get(i).getUserActivityKey().getDateTime());
+				CalorieHistory ch = new CalorieHistory();
+				ch.setDateTime(dateTime);
+				
+				Double hours = userActivityList.get(i).getUserActivityKey().getHours();
+				
+				Integer userWeight = userActivityList.get(i).getUserActivityKey().getUser().getWeight();
+
+				Double calorieBurn;
+				
+				if (userWeight == null) {
+					userWeight = 70;
+				}
+
+				if (userWeight <= 58) {
+					calorieBurn = userActivityList.get(i).getUserActivityKey().getActivity().getCal_hour_58kg() * hours;
+				} else if (userWeight <= 70) {
+					calorieBurn = userActivityList.get(i).getUserActivityKey().getActivity().getCal_hour_70kg() * hours;
+				} else if (userWeight <= 81) {
+					calorieBurn = userActivityList.get(i).getUserActivityKey().getActivity().getCal_hour_81kg() * hours;
+				} else {
+					calorieBurn = userActivityList.get(i).getUserActivityKey().getActivity().getCal_hour_92kg() * hours;
+				}
+
+				ch.setCalorieValue(calorieBurn);
+				calorieBurnHistory.add(ch);
+			
+			} catch (ParseException e) {
+			}
+			
+		}
+
+		return calorieBurnHistory;
 	}
 }

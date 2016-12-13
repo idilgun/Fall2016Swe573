@@ -65,6 +65,7 @@
 												ng-click="tab = 1">Food and Activity History</a></li>
 											<li class=""><a data-toggle="tab" href
 												ng-click="tab = 2">Weight History</a></li>
+											
 										</ul>
 										<div class="tab-content">
 											<div id="tab-1" class="tab-pane active" ng-show="tab===1">
@@ -209,6 +210,7 @@
 													<p ng-show="showNoData">You have not provided your weight information yet.</p>
 												</div>
 											</div>
+											
 										</div>
 									</div>
 								</ul>
