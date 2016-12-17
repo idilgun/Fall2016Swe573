@@ -74,15 +74,17 @@ public class SearchController {
 			
 			USDAResponseUtil.filterFoodsByGroup(usdaResponse, group);
 			
-			if(usdaResponse.getList().getItems().isEmpty()){
+			if(usdaResponse.getList() !=null && usdaResponse.getList().getItems().isEmpty()){
 				usdaResponse = unfilteredResponse;
 			}
 
-			ResponseEntity<SearchByNameResponse> response = new ResponseEntity<SearchByNameResponse>(usdaResponse,
-					HttpStatus.OK);
+			if(usdaResponse.getList()!=null){
+				ResponseEntity<SearchByNameResponse> response = new ResponseEntity<SearchByNameResponse>(usdaResponse,
+						HttpStatus.OK);
 
-			return response;
-
+				return response;
+			}
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

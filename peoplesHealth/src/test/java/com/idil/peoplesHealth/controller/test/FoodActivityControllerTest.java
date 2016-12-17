@@ -41,7 +41,7 @@ public class FoodActivityControllerTest {
 
 	@Test
 	public void testGetFoodActivityHistory() {
-		assertEquals(foodActivityController.getFoodActivityHistory("idilgun@gmail.com", "20161209").getBody().getActivityHistory().size(), 2);
+		assertEquals(3, foodActivityController.getFoodActivityHistory("idilgun@gmail.com", "20161209").getBody().getActivityHistory().size());
 	}
 
 }

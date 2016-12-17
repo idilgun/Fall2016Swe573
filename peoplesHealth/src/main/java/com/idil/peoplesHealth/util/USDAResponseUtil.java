@@ -10,6 +10,10 @@ public class USDAResponseUtil {
 
 	public static void filterFoodsByGroup(SearchByNameResponse response, final String group){
 		
+		if(response.getList()==null){
+			return;
+		}
+		
 		ArrayList<Item> foods = response.getList().getItems();
 		
 		Predicate<Item> isDesiredGroup = new Predicate<Item>() {
