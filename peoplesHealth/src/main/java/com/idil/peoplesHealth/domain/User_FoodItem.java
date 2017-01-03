@@ -28,9 +28,6 @@ public class User_FoodItem {
 	    private User user;
 
 	    private FoodItem foodItem;
-
-	    @Column(name = "itemAmount")
-	    private Double itemAmount;
 	    
 	    @Column(name = "dateTime")
 	    private String dateTime;
@@ -53,14 +50,6 @@ public class User_FoodItem {
 			this.foodItem = foodItem;
 		}
 
-		public Double getItemAmount() {
-			return itemAmount;
-		}
-
-		public void setItemAmount(Double itemAmount) {
-			this.itemAmount = itemAmount;
-		}
-
 		public String getDateTime() {
 			return dateTime;
 		}
@@ -72,6 +61,8 @@ public class User_FoodItem {
 	
 	private User_FoodItemPK userConsumptionKey;
 	
+	private Double itemAmount;
+	
 	@EmbeddedId
 	public User_FoodItemPK getUserConsumptionKey() {
 		return userConsumptionKey;
@@ -79,5 +70,14 @@ public class User_FoodItem {
 
 	public void setUserConsumptionKey(User_FoodItemPK userConsumptionKey) {
 		this.userConsumptionKey = userConsumptionKey;
+	}
+	
+	@Column(name = "itemAmount")
+	public Double getItemAmount() {
+		return itemAmount;
+	}
+
+	public void setItemAmount(Double itemAmount) {
+		this.itemAmount = itemAmount;
 	}
 }

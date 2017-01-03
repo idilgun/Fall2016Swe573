@@ -56,7 +56,10 @@ public class FoodActivityController {
 
 		try {
 			foodConsumptionDao.addFoodConsumption(foodConsumption);
-		} catch (Exception e) {
+		}catch(DataIntegrityViolationException e){
+			foodConsumptionDao.updateFoodConsumption(foodConsumption);
+		} 
+		catch (Exception e) {
 			ResponseEntity<Message> response = new ResponseEntity<Message>(
 					new Message("Couldn't add food item for user"), HttpStatus.BAD_REQUEST);
 			return response;

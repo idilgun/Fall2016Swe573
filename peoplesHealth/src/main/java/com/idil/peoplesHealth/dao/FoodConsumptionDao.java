@@ -88,12 +88,11 @@ public class FoodConsumptionDao {
 		
 		consumptionKey.setFoodItem(foodItem);
 		
-		consumptionKey.setItemAmount(Double.valueOf(foodConsumption.getAmount().replace(",", ".")));
-		
 		consumptionKey.setDateTime(foodConsumption.getDate());
 		
 		User_FoodItem consumption = new User_FoodItem();
 		consumption.setUserConsumptionKey(consumptionKey);
+		consumption.setItemAmount(Double.valueOf(foodConsumption.getAmount().replace(",", ".")));
 		
 		sessionFactory.getCurrentSession().save(consumption);
 	}
@@ -111,7 +110,7 @@ public class FoodConsumptionDao {
 		 
 		 for(int i=0; i<userConsumptionList.size(); i++){
 			 FoodItem foodItem = userConsumptionList.get(i).getUserConsumptionKey().getFoodItem();
-			 foodItem.setAmount(userConsumptionList.get(i).getUserConsumptionKey().getItemAmount());
+			 foodItem.setAmount(userConsumptionList.get(i).getItemAmount());
 			 foodItem.setUnit(userConsumptionList.get(i).getUserConsumptionKey().getFoodItem().getNdbno_unit().getItemUnit());
 			 foodList.add(foodItem);
 		 }
@@ -147,6 +146,32 @@ public class FoodConsumptionDao {
 			} 
 		 }
 		return calorieConsumptionHistory;
+		
+	}
+
+	@Transactional
+	public void updateFoodConsumption(FoodConsumption foodConsumption) {
+		
+		ndbno_itemUnit id = new ndbno_itemUnit();
+		id.setItemUnit(foodConsumption.getItemUnit());
+		id.setNdbno(foodConsumption.getNdbno());
+		
+		FoodItem foodItem = (FoodItem) sessionFactory.getCurrentSession().get(FoodItem.class, id);
+		
+		User user = (User) sessionFactory.getCurrentSession().get(User.class, foodConsumption.getEmail());
+		
+		User_FoodItemPK consumptionKey = new User_FoodItemPK();
+		
+		consumptionKey.setUser(user);
+		
+		consumptionKey.setFoodItem(foodItem);
+		
+		consumptionKey.setDateTime(foodConsumption.getDate());
+		
+		User_FoodItem consumption = (User_FoodItem)sessionFactory.getCurrentSession().get(User_FoodItem.class, consumptionKey);
+		consumption.setItemAmount(consumption.getItemAmount() + Double.valueOf(foodConsumption.getAmount().replace(",", ".")));
+		
+		sessionFactory.getCurrentSession().update(consumption);
 		
 	}
 	

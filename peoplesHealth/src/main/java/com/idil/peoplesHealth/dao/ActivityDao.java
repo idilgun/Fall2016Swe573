@@ -178,11 +178,11 @@ public class ActivityDao {
 
 		activityKey.setDateTime(date);
 		
-		User_Activity existingActivity = new User_Activity();
+		User_Activity existingActivity = (User_Activity) sessionFactory.getCurrentSession().get(User_Activity.class, activityKey);
 		
 		existingActivity.setUserActivityKey(activityKey);
 		
-		existingActivity.setHours(Double.valueOf(hours.replace(",", "."))*2);
+		existingActivity.setHours(existingActivity.getHours() + Double.valueOf(hours.replace(",", ".")));
 		
 		sessionFactory.getCurrentSession().update(existingActivity);
 		
