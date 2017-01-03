@@ -3,6 +3,7 @@ package com.idil.peoplesHealth.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -79,7 +80,11 @@ public class FoodActivityController {
 
 		try {
 			activityDao.addActivityForUser(activityId, email, date, hours);
-		} catch (Exception e) {
+		} 
+		catch(DataIntegrityViolationException e){
+			activityDao.updateActicityForUser(activityId, email, date, hours);
+		}
+		catch (Exception e) {
 			ResponseEntity<Message> response = new ResponseEntity<Message>(
 					new Message("Couldn't add activity for user"), HttpStatus.BAD_REQUEST);
 			return response;

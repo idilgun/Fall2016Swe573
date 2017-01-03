@@ -7,9 +7,11 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,16 +60,16 @@ public class ActivityDao {
 
 		activityKey.setUser(user);
 
-		activityKey.setHours(Double.valueOf(hours.replace(",", ".")));
-
 		activityKey.setActivity(activity);
 
 		activityKey.setDateTime(date);
 
 		User_Activity userActivity = new User_Activity();
 		userActivity.setUserActivityKey(activityKey);
+		userActivity.setHours(Double.valueOf(hours.replace(",", ".")));
 
 		sessionFactory.getCurrentSession().save(userActivity);
+
 	}
 
 	@Transactional
@@ -83,7 +85,7 @@ public class ActivityDao {
 		for (int i = 0; i < userActivityList.size(); i++) {
 			ActvityHistoryItem activity = new ActvityHistoryItem();
 			activity.setActivityName(userActivityList.get(i).getUserActivityKey().getActivity().getActivityName());
-			Double hours = userActivityList.get(i).getUserActivityKey().getHours();
+			Double hours = userActivityList.get(i).getHours();
 			activity.setHours(hours);
 
 			Integer userWeight = userActivityList.get(i).getUserActivityKey().getUser().getWeight();
@@ -127,13 +129,13 @@ public class ActivityDao {
 				Date dateTime = formatter.parse(userActivityList.get(i).getUserActivityKey().getDateTime());
 				CalorieHistory ch = new CalorieHistory();
 				ch.setDateTime(dateTime);
-				
-				Double hours = userActivityList.get(i).getUserActivityKey().getHours();
-				
+
+				Double hours = userActivityList.get(i).getHours();
+
 				Integer userWeight = userActivityList.get(i).getUserActivityKey().getUser().getWeight();
 
 				Double calorieBurn;
-				
+
 				if (userWeight == null) {
 					userWeight = 70;
 				}
@@ -150,12 +152,40 @@ public class ActivityDao {
 
 				ch.setCalorieValue(calorieBurn);
 				calorieBurnHistory.add(ch);
-			
+
 			} catch (ParseException e) {
 			}
-			
+
 		}
 
 		return calorieBurnHistory;
+	}
+	
+	@Transactional
+	public void updateActicityForUser(String activityId, String email, String date, String hours) {
+
+		
+		Activity activity = (Activity) sessionFactory.getCurrentSession().get(Activity.class,
+				Integer.valueOf(activityId));
+
+		User user = (User) sessionFactory.getCurrentSession().get(User.class, email);
+		
+		User_ActivityPK activityKey = new User_ActivityPK();
+
+		activityKey.setUser(user);
+
+		activityKey.setActivity(activity);
+
+		activityKey.setDateTime(date);
+		
+		User_Activity existingActivity = new User_Activity();
+		
+		existingActivity.setUserActivityKey(activityKey);
+		
+		existingActivity.setHours(Double.valueOf(hours.replace(",", "."))*2);
+		
+		sessionFactory.getCurrentSession().update(existingActivity);
+		
+
 	}
 }

@@ -30,9 +30,6 @@ public class User_Activity {
 	    
 	    @Column(name = "dateTime")
 	    private String dateTime;
-	    
-	    @Column(name = "hours")
-	    private Double hours;
 
 	    @ManyToOne
 		public User getUser() {
@@ -60,18 +57,11 @@ public class User_Activity {
 			this.dateTime = dateTime;
 		}
 
-		public Double getHours() {
-			return hours;
-		}
-
-		public void setHours(Double hours) {
-			this.hours = hours;
-		}
-		
-		
 	}
 	
 	private User_ActivityPK userActivityKey;
+	
+    private Double hours;
 	
 	@EmbeddedId
 	public User_ActivityPK getUserActivityKey() {
@@ -80,6 +70,14 @@ public class User_Activity {
 
 	public void setUserActivityKey(User_ActivityPK userActivityKey) {
 		this.userActivityKey = userActivityKey;
+	}
+	@Column(name = "hours")
+	public Double getHours() {
+		return hours;
+	}
+
+	public void setHours(Double hours) {
+		this.hours = hours;
 	}
 	
 	
