@@ -199,7 +199,6 @@ loginApp.controller('bmiController', [
 				$http.post($scope.getUrl() + '/updateUserInformation', user, {
 					'Content-Type' : 'application/json'
 				}).success(function(data, status, headers, config) {
-					$rootScope.email = $scope.signUp_email;
 					UserService.setUser(user);
 					$scope.setWeightHeight();
 					$scope.updateBmi();
